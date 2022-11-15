@@ -7,7 +7,7 @@ Pir::Pir(int pin){
   this->pin = pin;
   pinMode(pin,INPUT);
 
-  //perchè non fa le stampe
+  Serial.begin(9600);
   Serial.print("Calibrating PIR sensor... ");
   for(int i = 0; i < CALIBRATION_TIME_SEC; i++){
     Serial.print(".");
@@ -17,6 +17,6 @@ Pir::Pir(int pin){
   delay(50);
 }
 
-int Pir::detectedMotion(){
+bool Pir::detectedMotion(){
   return digitalRead(pin);
 }

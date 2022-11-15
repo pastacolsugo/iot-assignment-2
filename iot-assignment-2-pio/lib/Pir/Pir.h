@@ -4,7 +4,7 @@
 class Pir {
 public:
   Pir(int pin);
-  int detectedMotion();
+  bool detectedMotion();
   
 private:
   int pin;

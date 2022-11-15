@@ -1,4 +1,8 @@
 #include "LampTask.h"
+#include <Arduino.h>
+
+#define THl 10
+#define T1 1000
 
 LampTask::LampTask(int led, int pir, int photo){
   this->led_pin = led;
@@ -12,18 +16,25 @@ void LampTask::init(int period){
   pir = new Pir(pir_pin);
   photo = new Photoresistor(photo_pin);
   state = OFF;
+  Serial.begin(9600);
 }
 
 void LampTask::tick(){
-  /*TODO:*/
+  Serial.println("detected00");
   switch (state){
     case OFF:
-      led->switchOn();
-      state = ON;
+      if(photo->getIntensity() < THl && pir->detectedMotion()){
+        Serial.println("detected");
+        led->switchOn();
+        state = ON;
+        this->time = millis();
+      }
       break;
     case ON:
-      led->switchOff();
-      state = OFF;
+      if(photo->getIntensity() > THl || millis() - time >= T1){
+        led->switchOff();
+        state = OFF;
+      }
       break;
   }
 }

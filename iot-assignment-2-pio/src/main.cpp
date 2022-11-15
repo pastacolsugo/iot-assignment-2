@@ -14,7 +14,7 @@ void setup() {
     
     //possono essere aggiunti in un array di task -- opzionale dato che sono solo 2
     Task* lamp = new LampTask(LA, P, LS);
-    lamp->init(500);
+    lamp->init(50);
     sched.addTask(lamp);
 
     /*

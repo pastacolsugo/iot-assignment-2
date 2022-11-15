@@ -2,15 +2,17 @@
 #define __LAMPTASK__
 
 #include <Task.h>
-#include "Led.h"
-#include "Pir.h"
-#include "Photoresistor.h"
+#include <Led.h>
+#include <Pir.h>
+#include <Photoresistor.h>
+#include <Timer.h>
 
 class LampTask: public Task {
+  long long time;
   int led_pin;
   int pir_pin;
   int photo_pin;
-  Light* led;
+  Led* led;
   Pir* pir;
   Photoresistor* photo;
   enum { ON, OFF} state;
