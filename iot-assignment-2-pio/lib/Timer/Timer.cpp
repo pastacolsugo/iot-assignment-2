@@ -1,5 +1,5 @@
 #include "Timer.h"
-#include "Arduino.h"
+#include <Arduino.h>
 
 volatile bool timerFlag;
 

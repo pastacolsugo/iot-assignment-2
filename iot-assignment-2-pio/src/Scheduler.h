@@ -1,8 +1,8 @@
 #ifndef __SCHEDULER__
 #define __SCHEDULER__
 
-#include "Timer.h"
-#include "Task.h"
+#include <Timer.h>
+#include <Task.h>
 
 #define MAX_TASKS 10
 

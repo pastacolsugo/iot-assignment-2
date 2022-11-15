@@ -1,7 +1,7 @@
 #ifndef __LAMPTASK__
 #define __LAMPTASK__
 
-#include "Task.h"
+#include <Task.h>
 #include "Led.h"
 #include "Pir.h"
 #include "Photoresistor.h"
