@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="static/chart.min.js"></script>
+	<title>IOT Assignment 2</title>
+</head>
+<body>
+	<canvas id="chart" width="400" height="150"></canvas>
+	<script type="text/javascript">
+		const ctx = document.getElementById('chart');
+		const blue_nice = 'rgba(66, 133, 244, 1)';
+		const blue_nice_transparent = 'rgba(66, 133, 244, 0.3)';
+
+		var data = {
+			labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114],
+			datasets: [{
+				label: 'metri',
+				data: [20,22,22,20,19,21,23,23,23,22,23,23,25,26,23,19,19,19,20,19,23,23,22,23,26,25,24,22,22,19,19,19,18,19,19,22,25,25,21,22,21,22,22,21,22,22,22,25,24,23,22,21,22,22,22,19,18,19,21,22,22,19,23,22,24,54,21,20,21,20,23,21,22,21,20,20,24,22,21,23,26,26,27,27,24,57,36,42,42,30,31,30,20,25,25,24,21,21,20,21,20,21,25,88,22,21,22,22,22,21,22,20,21,20,20],
+				borderColor: blue_nice,
+				backgroundColor: blue_nice_transparent,
+				fill: true,
+				stepped: 'middle',
+				pointRadius: 0,
+				borderJoinStyle: 'round',
+				borderWidth: '2',
+			},
+			]
+		};
+		const config = {
+			type: 'line',
+			data: data,
+			options: {
+				plugins: {
+					filler: {
+						propagate: false,
+					},
+					title: {
+						display: true,
+						text: 'Water level'
+					}
+				},
+				interaction: {
+					intersect: false,
+				}
+			},
+		};
+		const chart = new Chart(ctx, config);
+	</script>
+	<p>Developed with <3 by Baroncini Ugo, Bighini Luca and Tellarini Pietro.</p>
+	</body>
+	</html>
