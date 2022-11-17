@@ -1,5 +1,7 @@
+
 #include "LampTask.h"
 #include <Arduino.h>
+
 
 #define THl 10
 #define T1 1000
@@ -21,20 +23,15 @@ void LampTask::init(int period){
 
 void LampTask::tick(){
   Serial.println("detected00");
-  switch (state){
-    case OFF:
-      if(photo->getIntensity() < THl && pir->detectedMotion()){
-        Serial.println("detected");
-        led->switchOn();
-        state = ON;
-        this->time = millis();
-      }
-      break;
-    case ON:
-      if(photo->getIntensity() > THl || millis() - time >= T1){
-        led->switchOff();
-        state = OFF;
-      }
-      break;
+  
+  if( (pir->detectedMotion()) ? this->time = millis() : false && (photo->getIntensity() < THl) && state == OFF)
+  {
+    Serial.println("detected");
+    led->switchOn();
+    state = ON;
+
+  } else if((photo->getIntensity() > THl || millis() - time >= T1) && state == ON){
+    led->switchOff();
+    state = OFF;
   }
 }
