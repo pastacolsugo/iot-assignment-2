@@ -43,6 +43,50 @@ footer {
 	margin-bottom: 8px;
 }
 
+.indicator {
+	margin: 32px;
+	display: flex;
+	justify-content: start;
+	align-content: center;
+}
+
+.indicator>span {
+	margin: auto 0 auto 8px;
+}
+
+.indicator::before {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	content: "";
+	background: pink;
+	border-radius: 10px;
+}
+
+.indicator.normal-status.active::before {
+	background: rgb(116, 203, 98);
+}
+
+.indicator.pre-alarm-status.active::before {
+	background: rgb(252, 163, 17);
+}
+
+.indicator.alarm-status.active::before {
+	background: rgb(136, 41, 47);
+}
+
+.indicator.normal-status.inactive::before {
+	background: rgba(116, 203, 98, 0.2);
+}
+
+.indicator.pre-alarm-status.inactive::before {
+	background: rgba(252, 163, 17, 0.2);
+}
+
+.indicator.alarm-status.inactive::before {
+	background: rgba(136, 41, 47, 0.2);
+}
+
 .auto-label, .manual-label {
 	min-width: 60px;
 	text-align: center;
