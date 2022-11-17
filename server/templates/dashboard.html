@@ -8,6 +8,7 @@
 	<script src="static/chart.min.js"></script>
 	<title>IOT Assignment 2</title>
 	<link href="static/dashboard.css" rel="stylesheet"/>
+	<link href="static/material-icons.css" rel="stylesheet"/>	
 </head>
 <body>
 	<div>
@@ -16,9 +17,9 @@
 			<span >Baroncini Ugo, Bighini Luca, Tellarini Pietro</span>
 		</header>
 		<main>
-			<canvas id="chart" width="400" height="150"></canvas>
+			<canvas id="chart" class="chart" width="400" height="150"></canvas>
 			<div class="controls">
-				<div class="button-box">
+				<div class="button-box control-box shadow">
 					<div class="toggle">
 						<h3 class="auto-label">
 							Auto
@@ -35,15 +36,24 @@
 						<input class="slider-label" type="number" min="0" max="180" step="1" value="0" oninput="(event) => {document.querySelector('.manual-slider').value = document.querySelector('.slider-label').value}" disabled>
 					</div>
 				</div>
-				<div class="status-box">
-					<h3>Bridge water level status:</h3>
-					<div class="alarm-indicator">
-						<div class="indicator normal-status inactive"><span>Normal</span></div>
-						<div class="indicator pre-alarm-status active"><span>Pre-Alarm</span></div>
-						<div class="indicator alarm-status inactive"><span>Alarm</span></div>
-					</div>
+				<div class="lights-box control-box shadow">
+					<h3>Smart lights:</h3>
 					<div class="lights-indicator">
-						Lights Off
+						OFF
+					</div>
+				</div>
+				<div class="status-box control-box shadow">
+					<div class="status-header">
+						<h3>Status:</h3>
+						<input id="alarm-sound-enable" type="checkbox" name="alarm-sound-enable">
+						<label id="alarm-sound-selector" class="sound-icon material-symbols-outlined" for="alarm-sound-enable">
+							volume_off
+						</label>
+					</div>
+					<div class="alarm-indicator">
+						<div class="indicator normal-status"><span>Normal</span></div>
+						<div class="indicator pre-alarm-status"><span>Pre-Alarm</span></div>
+						<div class="indicator alarm-status"><span>Alarm</span></div>
 					</div>
 				</div>
 			</div>
@@ -52,6 +62,72 @@
 	<footer>
 		Developed with <3 by Baroncini Ugo, Bighini Luca and Tellarini Pietro.
 	</footer>
+	<script type="text/javascript">
+		function setLights(status) {
+			let lightsIndicator = document.querySelector('.lights-indicator');
+
+			if (status == 'on') {
+				lightsIndicator.classList.add('lights-on');
+				lightsIndicator.innerText = 'ON';
+			} else if (status == 'off') {
+				lightsIndicator.classList.remove('lights-on');
+				lightsIndicator.innerText = 'OFF';
+			} else {
+				console.log("ERROR: setLights() parameter not valid.\nParameter: " + status + "\nAllowed values are 'on' and 'off' as strings.");
+			}
+		}
+
+		function setStatus(status) {
+			let normalIndicator = document.querySelector('div.normal-status');
+			let preAlarmIndicator = document.querySelector('div.pre-alarm-status');
+			let alarmIndicator = document.querySelector('div.alarm-status');
+
+			normalIndicator.classList.remove('active');
+			preAlarmIndicator.classList.remove('active');
+			alarmIndicator.classList.remove('active');
+
+			if (status == 'normal') {
+				normalIndicator.classList.add('active');
+			} else if (status == 'pre-alarm') {
+				preAlarmIndicator.classList.add('active');
+			} else if (status == 'alarm') {				
+				alarmIndicator.classList.add('active');
+				checkAlarm();
+			} else {
+				console.log("ERROR: setStatus() parameter not valid.\nParameter: " + status + "\nAllowed values are 'normal', 'pre-alarm' and 'alarm' as strings.");
+			}
+		}
+
+		function checkAlarm() {
+			const isAlarmEnabled = document.querySelector('#alarm-sound-enable').checked;
+
+			if (isAlarmEnabled) {
+	            var audio = new Audio('static/beep.mp3');
+	            audio.play();
+			}
+
+			if (document.querySelector('div.alarm-status').classList.contains('active')) {
+				setTimeout(checkAlarm, 1200);
+			}
+		}
+
+	</script>
+	<script type="text/javascript">
+		let alarmSoundSelector = document.querySelector('#alarm-sound-selector');
+
+		alarmSoundSelector.addEventListener('click', function(e) {
+			setTimeout(100, function() {
+				let checkbox = document.querySelector('#alarm-sound-enable');
+				let label = document.querySelector('#alarm-sound-selector');
+
+				if (document.querySelector('#alarm-sound-enable').checked) {
+					label.innerText = 'volume_up';
+				} else {				
+					label.innerText = 'volume_off';
+				}
+			});
+		});
+	</script>
 	<script type="text/javascript">
 		let slider = document.querySelector('.manual-slider');
 		let slider_label = document.querySelector('.slider-label');
