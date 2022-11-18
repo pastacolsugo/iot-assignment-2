@@ -1,7 +1,7 @@
 #ifndef __VALVE__
 #define __VALVE__
 
-#include <Servo.h>
+#include <ServoTimer2.h>
 
 class Valve{
 public:
@@ -10,7 +10,7 @@ public:
 
 private:
     int pin;
-    Servo valve;
+    ServoTimer2 valve;
 };
 
 #endif
