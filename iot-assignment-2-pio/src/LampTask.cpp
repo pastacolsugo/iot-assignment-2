@@ -17,21 +17,20 @@ void LampTask::init(int period){
   led = new Led(led_pin);
   pir = new Pir(pir_pin);
   photo = new Photoresistor(photo_pin);
-  state = OFF;
   Serial.begin(9600);
 }
 
 void LampTask::tick(){
   Serial.println("detected00");
   
-  if( (pir->detectedMotion()) ? this->time = millis() : false && (photo->getIntensity() < THl) && state == OFF)
+  if((pir->detectedMotion()) ? this->time = millis() : false && (photo->getIntensity() < THl))
   {
+    // accende continuamente il led... che ce ne frega...volendo si aggiunge un controllo sullo stato
     Serial.println("detected");
     led->switchOn();
-    state = ON;
 
-  } else if((photo->getIntensity() > THl || millis() - time >= T1) && state == ON){
+  } else if(photo->getIntensity() > THl || millis() - time >= T1){
+    // Come sopra
     led->switchOff();
-    state = OFF;
   }
 }
