@@ -1,9 +1,11 @@
-#include <Arduino.h>
 #include <Led.h>
+#include <Arduino.h>
+
+#define BlinkTime 1000
 
 Led::Led(int pin){
   this->pin = pin;
-  pinMode(pin,OUTPUT);
+  pinMode(pin,OUTPUT);  
 }
 
 void Led::switchOn(){
@@ -13,3 +15,10 @@ void Led::switchOn(){
 void Led::switchOff(){
   digitalWrite(pin,LOW);
 };
+
+void Led::blink(){
+  if(millis() - this->t >= BlinkTime){
+    this->t = millis();
+    digitalWrite(this->pin, !digitalRead(this->pin));
+  }
+}

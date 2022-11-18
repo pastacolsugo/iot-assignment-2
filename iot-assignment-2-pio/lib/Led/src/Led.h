@@ -6,8 +6,10 @@ public:
   Led(int pin);
   void switchOn();
   void switchOff();
+  void blink();
       
 private:
+  long t;
   int pin;  
 };
 
