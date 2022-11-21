@@ -12,25 +12,31 @@ LampTask::LampTask(int led, int pir, int photo){
   this->photo_pin = photo;
 }
 
-void LampTask::init(int period){
-  Task::init(period);
+void LampTask::init(int period, Status* state){
+  Task::init(period, state);
   led = new Led(led_pin);
   pir = new Pir(pir_pin);
   photo = new Photoresistor(photo_pin);
-  Serial.begin(9600);
+  //Serial.begin(9600);
 }
 
 void LampTask::tick(){
   Serial.println("detected00");
   
-  if((pir->detectedMotion()) ? this->time = millis() : false && (photo->getIntensity() < THl))
+  if( (pir->detectedMotion()) ? this->time = millis() : false &&
+      photo->getIntensity() < THl &&
+      STATUS->matchStatus(Status::Light::OFF) && 
+      (STATUS->matchStatus(Status::IDLE) || STATUS->matchStatus(Status::PREALARM)))
   {
-    // accende continuamente il led... che ce ne frega...volendo si aggiunge un controllo sullo stato
-    Serial.println("detected");
+    //Serial.println("detected");
     led->switchOn();
+    STATUS->setLamp(Status::Light::ON);
 
-  } else if(photo->getIntensity() > THl || millis() - time >= T1){
-    // Come sopra
+  } else if(STATUS->matchStatus(Status::Light::ON) && 
+            (photo->getIntensity() > THl || millis() - time >= T1 ||
+            STATUS->matchStatus(Status::ALARM) ))
+  {
     led->switchOff();
+    STATUS->setLamp(Status::Light::OFF);
   }
 }

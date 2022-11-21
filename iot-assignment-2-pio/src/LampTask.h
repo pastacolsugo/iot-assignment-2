@@ -8,6 +8,8 @@
 #include <Photoresistor.h>
 
 class LampTask: public Task {
+
+private:
   long long time;
   int led_pin;
   int pir_pin;
@@ -18,7 +20,7 @@ class LampTask: public Task {
 
 public:
   LampTask(int led, int pir, int photo);
-  void init(int period);
+  void init(int period, Status* state);
   void tick();
 };
 

@@ -22,7 +22,7 @@ class ValveTask: public Task {
 
     public:
         ValveTask(int led, int grrenLed, int sonarTrigPin, int sonarEchoPin, int valvePin);
-        void init(int period);
+        void init(int period, Status* state);
         void tick();
 
 };
