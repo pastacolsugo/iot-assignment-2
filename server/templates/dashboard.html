@@ -45,10 +45,6 @@
 				<div class="status-box control-box shadow">
 					<div class="status-header">
 						<h3>Status:</h3>
-						<input id="alarm-sound-enable" type="checkbox" name="alarm-sound-enable">
-						<label id="alarm-sound-selector" class="sound-icon material-symbols-outlined" for="alarm-sound-enable">
-							volume_off
-						</label>
 					</div>
 					<div class="alarm-indicator">
 						<div class="indicator normal-status"><span>Normal</span></div>
@@ -92,58 +88,114 @@
 				preAlarmIndicator.classList.add('active');
 			} else if (status == 'alarm') {				
 				alarmIndicator.classList.add('active');
-				checkAlarm();
+				playAlarm();
 			} else {
 				console.log("ERROR: setStatus() parameter not valid.\nParameter: " + status + "\nAllowed values are 'normal', 'pre-alarm' and 'alarm' as strings.");
 			}
 		}
 
-		function checkAlarm() {
-			const isAlarmEnabled = document.querySelector('#alarm-sound-enable').checked;
-
-			if (isAlarmEnabled) {
+		function playAlarm() {
+            if (document.querySelector('div.alarm-status').classList.contains('active')) {
 	            var audio = new Audio('static/beep.mp3');
 	            audio.play();
-			}
-
-			if (document.querySelector('div.alarm-status').classList.contains('active')) {
-				setTimeout(checkAlarm, 1200);
+				setTimeout(checkAlarm, 2000);
 			}
 		}
 
 	</script>
 	<script type="text/javascript">
-		let alarmSoundSelector = document.querySelector('#alarm-sound-selector');
+		async function updateChart() {
+			let res = await fetch(new Request('/chart-data'), { method: 'GET' });
 
-		alarmSoundSelector.addEventListener('click', function(e) {
-			setTimeout(100, function() {
-				let checkbox = document.querySelector('#alarm-sound-enable');
-				let label = document.querySelector('#alarm-sound-selector');
+			if (res.status != 200) {
+				console.log('Fetching chart data has failed.');
+				return ;
+			}
 
-				if (document.querySelector('#alarm-sound-enable').checked) {
-					label.innerText = 'volume_up';
-				} else {				
-					label.innerText = 'volume_off';
-				}
-			});
-		});
+			let res_data = await res.json();
+			let timestamps = res_data.map(v => v[0]);
+			let values = res_data.map(v => v[1]);
+			chart.data.datasets[0].data = values;
+			chart.data.labels = timestamps;
+			chart.update();
+		}
+
+		async function updateStatus() {
+			let res = await fetch(new Request('/status'), { method: 'GET' })
+
+			if (res.status != 200) {
+				console.log('Fetching status has failed.');
+				return ;
+			}
+
+			let bridge_state = await res.text();
+			setStatus(bridge_state);
+		}
+
+		async function updateLights() {
+			let res = await fetch(new Request('/lights'), { method: 'GET' })
+
+			if (res.status != 200) {
+				console.log('Fetching lights state has failed.');
+				return ;
+			}
+
+			let lights_state = await res.text();
+			setLights(lights_state);			
+		}
+
+		async function syncAutoManualSelector() {				
+			let res = await fetch(new Request('/get-auto-manual'), { method: 'GET' })
+
+			if (res.status != 200) {
+				console.log('Fetching auto/manual state has failed.');
+				return ;
+			}
+
+			let auto_manual_state = await res.text();
+			document.querySelector('#auto_manual_selector').checked = (auto_manual_state == 'True')
+		}
+
+		async function updateDashboard() {
+			updateChart();
+			updateStatus();
+			updateLights();
+			syncAutoManualSelector();
+
+			setTimeout(updateDashboard, 2000);
+		}
+		updateDashboard();
 	</script>
 	<script type="text/javascript">
 		let slider = document.querySelector('.manual-slider');
 		let slider_label = document.querySelector('.slider-label');
 		let auto_manual_selector = document.querySelector('#auto-manual-selector');
 
+		function sendNewValue(){
+			let valve_position = document.querySelector('.manual-slider').value;
+			fetch(new Request('/set-valve', { method: 'POST', body: valve_position.toString()})
+		}
+
 		slider.addEventListener('input', function(e) {
 			document.querySelector('.slider-label').value = document.querySelector('.manual-slider').value;
+			sendNewValue();
 		});
 
 		slider_label.addEventListener('input', function(e) {
 			document.querySelector('.manual-slider').value = document.querySelector('.slider-label').value;
+			sendNewValue();
 		});
 
 		auto_manual_selector.addEventListener('change', function(e) {
-			document.querySelector('.manual-slider').disabled = !document.querySelector('#auto-manual-selector').checked;
-			document.querySelector('.slider-label').disabled = !document.querySelector('#auto-manual-selector').checked;
+			const auto_manual_selector = document.querySelector('#auto-manual-selector');
+
+			document.querySelector('.manual-slider').disabled = !auto_manual_selector.checked;
+			document.querySelector('.slider-label').disabled = !auto_manual_selector.checked;
+
+			fetch(new Request('/set-auto-manual'), { 
+				method: 'POST',
+				body: auto_manual_selector.checked,
+			});
 		});
 	</script>
 	<script type="text/javascript">
