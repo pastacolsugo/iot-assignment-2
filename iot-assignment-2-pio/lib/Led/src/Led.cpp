@@ -10,11 +10,4 @@ Led::Led(int pin) {
 
 void Led::switchOn() { digitalWrite(pin, HIGH); }
 
-void Led::switchOff() { digitalWrite(pin, LOW); };
-
-void Led::blink() {
-  if (millis() - this->t >= BlinkTime) {
-    this->t = millis();
-    digitalWrite(this->pin, !digitalRead(this->pin));
-  }
-}
+void Led::switchOff() { digitalWrite(pin, LOW); }
