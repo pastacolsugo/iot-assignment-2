@@ -19,8 +19,8 @@ class Status {
         Control getValve();
         void setState(State st);
         void setWater(int lv);
-        bool matchStatus(State st);
-        bool matchStatus(Light lg);
+        bool matchStateStatus(State st);
+        bool matchLampStatus(Light lg);
         bool matchValveStatus(Control vl);
         int getWater();
         void setLamp(Light lv);
