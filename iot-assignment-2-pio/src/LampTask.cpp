@@ -18,26 +18,36 @@ void LampTask::init(int period) {
   led = new Led(led_pin);
   pir = new Pir(pir_pin);
   photo = new Photoresistor(photo_pin);
-  // Serial.begin(9600);
 }
 
-void LampTask::tick() {
+void LampTask::run() {
   Serial.println("detected00");
 
-  if ((pir->detectedMotion())
-          ? this->time = millis()
-          : false && photo->getIntensity() < THl &&
-                status->matchLampStatus(Light::OFF) &&
-                (status->matchStateStatus(State::IDLE) ||
-                 status->matchStateStatus(State::PREALARM))) {
-    // Serial.println("detected");
-    led->switchOn();
-    status->setLamp(Light::ON);
+  bool isMotionDetected = pir->detectedMotion();
+  auto lightIntensity = photo->getIntensity();
 
-  } else if (status->matchLampStatus(Light::ON) &&
-             (photo->getIntensity() > THl || millis() - time >= T1 ||
-              status->matchStateStatus(State::ALARM))) {
-    led->switchOff();
-    status->setLamp(Light::OFF);
+  if (isMotionDetected) {
+    this->time = millis();
   }
+  if (isMotionDetected and lightIntensity < THl and
+      status == Light::OFF and
+      (status->matchStateStatus(State::NORMAL) or
+       status->matchStateStatus(State::PREALARM))) {
+
+       }
+
+    if ((pir->detectedMotion() ? this->time = millis() : false) &&
+        lightIntensity < THl && status->matchLampStatus(Light::OFF) &&
+        (status->matchStateStatus(State::NORMAL) ||
+         status->matchStateStatus(State::PREALARM))) {
+      // Serial.println("detected");
+      led->switchOn();
+      status->setLamp(Light::ON);
+
+    } else if (status->matchLampStatus(Light::ON) &&
+               (lightIntensity > THl || millis() - time >= T1 ||
+                status->matchStateStatus(State::ALARM))) {
+      led->switchOff();
+      status->setLamp(Light::OFF);
+    }
 }

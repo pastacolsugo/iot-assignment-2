@@ -29,6 +29,6 @@ void SonarTask::tick() {
   } else if (tmp > WL1) {
     status->setState(State::PREALARM);
   } else {
-    status->setState(State::IDLE);
+    status->setState(State::NORMAL);
   }
 }

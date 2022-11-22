@@ -21,7 +21,7 @@ class LampTask : public Task {
  public:
   LampTask(int led, int pir, int photo, Status* state);
   void init(int period);
-  void tick();
+  void run();
 };
 
 #endif
