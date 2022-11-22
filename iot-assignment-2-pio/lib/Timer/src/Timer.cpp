@@ -11,8 +11,7 @@ Timer::Timer(){
   timerFlag = false;  
 }
 
-void Timer::setupFreq(int freq){
-  
+void Timer::setupFreq(int freq){ 
   // disabling interrupt
   cli();
 
@@ -36,13 +35,11 @@ void Timer::setupFreq(int freq){
   TIMSK1 |= (1 << OCIE1A);
 
   // enabling interrupt
-  sei();
-  
+  sei(); 
 }
 
 /* period in ms */
-void Timer::setupPeriod(int period){
-  
+void Timer::setupPeriod(int period){ 
   // disabling interrupt
   cli();
 
@@ -67,12 +64,10 @@ void Timer::setupPeriod(int period){
 
   // enabling interrupt
   sei();
-  
 }
 
 void Timer::waitForNextTick(){
   /* wait for timer signal */
-  while (!timerFlag){}
-  timerFlag = false;
-  
+  while (!timerFlag) {}
+  timerFlag = false; 
 }
