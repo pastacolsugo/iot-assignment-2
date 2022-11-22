@@ -2,7 +2,7 @@
 #define __ENUM__
 
 enum State {
-	IDLE,
+	NORMAL,
 	PREALARM,
 	ALARM
 };
