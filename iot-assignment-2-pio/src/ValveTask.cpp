@@ -26,8 +26,8 @@ void ValveTask::tick() {
     valve->setPosition(map(status->getWater(), WL2, BH, 0, 180));
 
   } else if (status->matchValveStatus(Control::MANUAL)) {
-    valve->setPosition(
-        180);  // COME ELABORO LA SERIALE? FACCIO LA LETTURA QUA o SALVO
-               // VARIABILE IN STATO? O ELABORO IN TASKMANUAL?
+    valve->setPosition(180);  
+            // COME ELABORO LA SERIALE? FACCIO LA LETTURA QUA o SALVO
+            // VARIABILE IN STATO? O ELABORO IN TASKMANUAL?
   }
 }
