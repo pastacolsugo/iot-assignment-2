@@ -2,7 +2,7 @@
 
 Status::Status(){
     this->lamp = OFF;
-    this->state = IDLE;
+    this->state = NORMAL;
 }
 
 State Status::getState(){
