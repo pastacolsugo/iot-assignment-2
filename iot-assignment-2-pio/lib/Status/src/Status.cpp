@@ -23,12 +23,11 @@ int Status::getWater(){
 
 bool Status::matchStateStatus(State st){
     return (this->state == st);
-  }
-
+}
 
 bool Status::matchLampStatus(Light lg){
     return (this->lamp == lg);
-  }
+}
 
 bool Status::matchValveStatus(Control vl){
     return (this->valve == vl);

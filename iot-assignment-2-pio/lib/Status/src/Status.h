@@ -3,9 +3,7 @@
 
 #include <Enum.h>
 
-
 class Status {
-   
     private:
         State state;
         Light lamp;
@@ -14,20 +12,21 @@ class Status {
 
     public:
         Status();
+
         State getState();
-        Light getLamp();
-        Control getValve();
         void setState(State st);
+
+        Light getLamp();
+        void setLamp(Light lv);
+        
+        int getWater();
         void setWater(int lv);
+
+        Control getValve();
+
         bool matchStateStatus(State st);
         bool matchLampStatus(Light lg);
         bool matchValveStatus(Control vl);
-        int getWater();
-        void setLamp(Light lv);
-
 };
-
-
-
 
 #endif
