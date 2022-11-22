@@ -1,15 +1,14 @@
 #ifndef __LAMPTASK__
 #define __LAMPTASK__
 
+#include <Led.h>
+#include <Photoresistor.h>
+#include <Pir.h>
 #include <Task.h>
 #include <Timer.h>
-#include <Led.h>
-#include <Pir.h>
-#include <Photoresistor.h>
 
-class LampTask: public Task {
-
-private:
+class LampTask : public Task {
+ private:
   long long time;
   int led_pin;
   int pir_pin;
@@ -19,7 +18,7 @@ private:
   Photoresistor* photo;
   Status* status;
 
-public:
+ public:
   LampTask(int led, int pir, int photo, Status* state);
   void init(int period);
   void tick();

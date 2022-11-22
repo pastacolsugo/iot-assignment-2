@@ -4,29 +4,29 @@
 #include <Enum.h>
 
 class Status {
-    private:
-        State state;
-        Light lamp;
-        Control valve;
-        int waterLevel;
+ private:
+  State state;
+  Light lamp;
+  Control valve;
+  int waterLevel;
 
-    public:
-        Status();
+ public:
+  Status();
 
-        State getState();
-        void setState(State st);
+  State getState();
+  void setState(State st);
 
-        Light getLamp();
-        void setLamp(Light lv);
-        
-        int getWater();
-        void setWater(int lv);
+  Light getLamp();
+  void setLamp(Light lv);
 
-        Control getValve();
+  int getWater();
+  void setWater(int lv);
 
-        bool matchStateStatus(State st);
-        bool matchLampStatus(Light lg);
-        bool matchValveStatus(Control vl);
+  Control getValve();
+
+  bool matchStateStatus(State st);
+  bool matchLampStatus(Light lg);
+  bool matchValveStatus(Control vl);
 };
 
 #endif

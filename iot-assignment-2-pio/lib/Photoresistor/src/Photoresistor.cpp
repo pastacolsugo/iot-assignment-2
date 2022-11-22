@@ -1,4 +1,5 @@
 #include "Photoresistor.h"
+
 #include <Arduino.h>
 
 Photoresistor::Photoresistor(int pin) {
@@ -6,6 +7,4 @@ Photoresistor::Photoresistor(int pin) {
   pinMode(pin, INPUT);
 }
 
-int Photoresistor::getIntensity() {
-  return analogRead(pin);
-}
+int Photoresistor::getIntensity() { return analogRead(pin); }

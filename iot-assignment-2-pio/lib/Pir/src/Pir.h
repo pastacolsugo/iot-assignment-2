@@ -2,11 +2,11 @@
 #define __PIR__
 
 class Pir {
-public:
+ public:
   Pir(int pin);
   bool detectedMotion();
-  
-private:
+
+ private:
   int pin;
 };
 

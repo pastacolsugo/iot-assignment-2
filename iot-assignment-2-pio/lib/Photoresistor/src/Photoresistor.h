@@ -2,11 +2,11 @@
 #define __PHOTORESISTOR__
 
 class Photoresistor {
-public:
+ public:
   Photoresistor(int pin);
   int getIntensity();
-  
-private:
+
+ private:
   int pin;
 };
 

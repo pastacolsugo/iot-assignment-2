@@ -1,4 +1,5 @@
 #include "Pir.h"
+
 #include <Arduino.h>
 
 #define CALIBRATION_TIME_SEC 5
@@ -19,6 +20,4 @@ Pir::Pir(int pin) {
   delay(50);
 }
 
-bool Pir::detectedMotion() {
-  return digitalRead(pin);
-}
+bool Pir::detectedMotion() { return digitalRead(pin); }

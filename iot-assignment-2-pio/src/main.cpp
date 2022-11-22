@@ -1,7 +1,8 @@
 #include <Arduino.h>
-#include "Status.h"
-#include "Scheduler.h"
+
 #include "LampTask.h"
+#include "Scheduler.h"
+#include "Status.h"
 #include "ValveTask.h"
 
 #define LA 13
@@ -11,22 +12,21 @@
 Scheduler sched;
 
 void setup() {
-    sched.init(50); //modified as best
+  sched.init(50);  // modified as best
 
-    Status* st = new Status();
+  Status* st = new Status();
 
-    //possono essere aggiunti in un array di task -- opzionale dato che sono solo 2
-    Task* lamp = new LampTask(LA, P, LS, st);
-    lamp->init(50);
-    sched.addTask(lamp);
+  // possono essere aggiunti in un array di task -- opzionale dato che sono solo
+  // 2
+  Task* lamp = new LampTask(LA, P, LS, st);
+  lamp->init(50);
+  sched.addTask(lamp);
 
-    /*
-    Task* valve = new ValveTask(...);
-    valve->init(...);
-    sched.addTask(valve);
-    */
+  /*
+  Task* valve = new ValveTask(...);
+  valve->init(...);
+  sched.addTask(valve);
+  */
 }
 
-void loop() {
-    sched.schedule();
-}
+void loop() { sched.schedule(); }
