@@ -25,18 +25,18 @@ void LampTask::tick(){
   
   if( (pir->detectedMotion()) ? this->time = millis() : false &&
       photo->getIntensity() < THl &&
-      STATUS->matchStatus(Status::Light::OFF) && 
-      (STATUS->matchStatus(Status::IDLE) || STATUS->matchStatus(Status::PREALARM)))
+      STATUS->matchStatus(Light::OFF) && 
+      (STATUS->matchStatus(State::IDLE) || STATUS->matchStatus(State::PREALARM)))
   {
     //Serial.println("detected");
     led->switchOn();
-    STATUS->setLamp(Status::Light::ON);
+    STATUS->setLamp(Light::ON);
 
-  } else if(STATUS->matchStatus(Status::Light::ON) && 
+  } else if(STATUS->matchStatus(Light::ON) && 
             (photo->getIntensity() > THl || millis() - time >= T1 ||
-            STATUS->matchStatus(Status::ALARM) ))
+            STATUS->matchStatus(State::ALARM) ))
   {
     led->switchOff();
-    STATUS->setLamp(Status::Light::OFF);
+    STATUS->setLamp(Light::OFF);
   }
 }

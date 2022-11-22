@@ -5,11 +5,11 @@ Status::Status(){
     this->state = IDLE;
 }
 
-Status::State Status::getState(){
+State Status::getState(){
     return this->state;
 }
 
-Status::Light Status::getLamp(){
+Light Status::getLamp(){
     return this->lamp;
 }
 
@@ -21,11 +21,11 @@ int Status::getWater(){
     return this->waterLevel;
 }
 
-bool Status::matchStatus(Status::State st){
+bool Status::matchStatus(State st){
     return (getState() == st);
   }
 
 
-bool Status::matchStatus(Status::Light lg){
+bool Status::matchStatus(Light lg){
     return (getLamp() == lg);
   }

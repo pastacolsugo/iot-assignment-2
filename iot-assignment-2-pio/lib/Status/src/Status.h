@@ -1,17 +1,16 @@
 #ifndef __STATUS__
 #define __STATUS__
 
+#include <Enum.h>
+
 
 class Status {
    
     public:
         Status();
-        enum State {IDLE, PREALARM, ALARM};
-        enum ValveControl {MANUAL, AUTO};
-        enum Light {ON, OFF};
 
-        bool matchStatus(Status::State st);
-        bool matchStatus(Status::Light lg);
+        bool matchStatus(State st);
+        bool matchStatus(Light lg);
         int getWater();
         void setLamp(Light lv);
 

@@ -21,7 +21,7 @@ void ValveTask::init(int period, Status* state){
 
 void ValveTask::tick(){
 
-    if( STATUS->matchStatus(Status::State::ALARM) )
+    if( STATUS->matchStatus(State::ALARM) )
     {
         valve->setPosition(map(STATUS->getWater(), WL2, BH, 0, 180));
     }
