@@ -6,17 +6,13 @@
 class Task {
   int myPeriod;
   int timeElapsed;
-
-protected:
-  Status* STATUS;
   
 public:
 
 
-  virtual void init(int period, Status* state){
+  virtual void init(int period){
     myPeriod = period; 
     timeElapsed = 0;
-    STATUS = state;
   }
 
   virtual void setPeriod(int period){

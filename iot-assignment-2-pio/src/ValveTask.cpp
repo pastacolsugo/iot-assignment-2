@@ -10,20 +10,21 @@
 #define PEP 30
 #define PEA 10
 
-ValveTask::ValveTask(int led, int greenLed, int sonarTrigPin, int sonarEchoPin, int valvePin){
+ValveTask::ValveTask(int valvePin, Status* state){
     this->valve_pin = valvePin;
+    this->status = state;
 }
 
-void ValveTask::init(int period, Status* state){
-    Task::init(period, state);
+void ValveTask::init(int period){
+    Task::init(period);
     valve = new Valve(this->valve_pin);
 }
 
 void ValveTask::tick(){
 
-    if( STATUS->matchStatus(State::ALARM) )
+    if( status->matchStatus(State::ALARM) )
     {
-        valve->setPosition(map(STATUS->getWater(), WL2, BH, 0, 180));
+        valve->setPosition(map(status->getWater(), WL2, BH, 0, 180));
     }
 
 }

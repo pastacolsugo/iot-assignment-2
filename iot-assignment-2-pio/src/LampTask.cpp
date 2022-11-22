@@ -6,14 +6,15 @@
 #define THl 10
 #define T1 1000
 
-LampTask::LampTask(int led, int pir, int photo){
+LampTask::LampTask(int led, int pir, int photo, Status* state){
   this->led_pin = led;
   this->pir_pin = pir;
   this->photo_pin = photo;
+  this->status = state;
 }
 
-void LampTask::init(int period, Status* state){
-  Task::init(period, state);
+void LampTask::init(int period){
+  Task::init(period);
   led = new Led(led_pin);
   pir = new Pir(pir_pin);
   photo = new Photoresistor(photo_pin);
@@ -25,18 +26,18 @@ void LampTask::tick(){
   
   if( (pir->detectedMotion()) ? this->time = millis() : false &&
       photo->getIntensity() < THl &&
-      STATUS->matchStatus(Light::OFF) && 
-      (STATUS->matchStatus(State::IDLE) || STATUS->matchStatus(State::PREALARM)))
+      status->matchStatus(Light::OFF) && 
+      (status->matchStatus(State::IDLE) || status->matchStatus(State::PREALARM)))
   {
     //Serial.println("detected");
     led->switchOn();
-    STATUS->setLamp(Light::ON);
+    status->setLamp(Light::ON);
 
-  } else if(STATUS->matchStatus(Light::ON) && 
+  } else if(status->matchStatus(Light::ON) && 
             (photo->getIntensity() > THl || millis() - time >= T1 ||
-            STATUS->matchStatus(State::ALARM) ))
+            status->matchStatus(State::ALARM) ))
   {
     led->switchOff();
-    STATUS->setLamp(Light::OFF);
+    status->setLamp(Light::OFF);
   }
 }

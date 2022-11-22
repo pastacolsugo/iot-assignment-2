@@ -9,20 +9,13 @@
 
 class ValveTask: public Task {
 
-    long long time;
-    int ledRed_pin;
-    int ledGre_pin;
-    int sonar_trigPin;
-    int sonar_echoPin;
     int valve_pin;
-    Led* redLed;
-    Led* greLed;
-    Sonar* sonar;
     Valve* valve;
+    Status* status;
 
     public:
-        ValveTask(int led, int grrenLed, int sonarTrigPin, int sonarEchoPin, int valvePin);
-        void init(int period, Status* state);
+        ValveTask(int valvePin, Status* state);
+        void init(int period);
         void tick();
 
 };
