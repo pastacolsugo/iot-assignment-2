@@ -23,17 +23,17 @@ void SonarTask::tick(){
     tmp = (WLMAX < tmp) ? WLMAX : WLMAX - tmp;
     status->setWater(tmp);
 
-    if(status->matchValveStatus(Control::AUTO)){
+    // Controllo forse errato...lo stato dovrebeb cambiare anche se sono in manuale.
+    // if(status->matchValveStatus(Control::AUTO)){}
 
-        if(tmp > WL2){
-            status->setState(State::ALARM);
-        }else if(tmp > WL1){
-            status->setState(State::PREALARM);
-        }else{
-            status->setState(State::IDLE);
-        }
-
+    if(tmp > WL2){
+        status->setState(State::ALARM);
+    }else if(tmp > WL1){
+        status->setState(State::PREALARM);
+    }else{
+        status->setState(State::IDLE);
     }
+
 
 
 }
