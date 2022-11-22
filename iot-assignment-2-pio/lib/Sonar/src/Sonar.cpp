@@ -20,7 +20,7 @@ float Sonar::getDistance(){
     /* ricevi l’eco */
     long tUS = pulseInLong(this->echoPin, HIGH);
     double t = tUS / 1000.0 / 1000.0 / 2;
-    double d = t*vs;
+    double d = t * vs;
 
     return d;
 }

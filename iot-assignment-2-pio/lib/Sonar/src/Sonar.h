@@ -7,8 +7,6 @@
 */ 
 
 class Sonar{
-
-
     public:
         Sonar(int trigPin, int echoPin);
         float getDistance();
@@ -17,8 +15,6 @@ class Sonar{
         int trigPin;
         int echoPin;
         const double vs = 331.45 + 0.62*20;
-
-
 };
 
 #endif
