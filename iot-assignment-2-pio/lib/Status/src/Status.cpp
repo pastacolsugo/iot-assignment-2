@@ -29,3 +29,7 @@ bool Status::matchStatus(State st){
 bool Status::matchStatus(Light lg){
     return (getLamp() == lg);
   }
+
+bool Status::matchValveStatus(Control vl){
+    return (this->valve == vl);
+}

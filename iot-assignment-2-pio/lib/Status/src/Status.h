@@ -6,25 +6,24 @@
 
 class Status {
    
-    public:
-        Status();
-
-        bool matchStatus(State st);
-        bool matchStatus(Light lg);
-        int getWater();
-        void setLamp(Light lv);
-
     private:
         State state;
         Light lamp;
-        ValveControl valve;
+        Control valve;
         int waterLevel;
+
+    public:
+        Status();
         State getState();
         Light getLamp();
+        Control getValve();
         void setState(State st);
         void setWater(int lv);
-
-        
+        bool matchStatus(State st);
+        bool matchStatus(Light lg);
+        bool matchValveStatus(Control vl);
+        int getWater();
+        void setLamp(Light lv);
 
 };
 
