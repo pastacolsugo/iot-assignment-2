@@ -3,7 +3,7 @@
 
 
         enum State {IDLE, PREALARM, ALARM};
-        enum ValveControl {MANUAL, AUTO};
+        enum Control {MANUAL, AUTO};
         enum Light {ON, OFF};
 
 
