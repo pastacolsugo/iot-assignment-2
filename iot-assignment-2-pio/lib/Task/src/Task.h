@@ -8,8 +8,6 @@ class Task {
   int timeElapsed;
   
 public:
-
-
   virtual void init(int period){
     myPeriod = period; 
     timeElapsed = 0;
@@ -19,18 +17,16 @@ public:
     myPeriod = period;
   }
 
-  virtual void tick() = 0;
+  virtual void run() = 0;
 
   bool updateAndCheckTime(int basePeriod){
     timeElapsed += basePeriod;
     if (timeElapsed >= myPeriod){
       timeElapsed = 0;
       return true;
-    } else {
-      return false; 
     }
-  }
-  
+    return false; 
+  } 
 };
 
 #endif
