@@ -2,8 +2,8 @@
 #define __VALVETASK__
 
 #include <Arduino.h>
-#include <Task.h>
 #include <Status.h>
+#include <Task.h>
 #include <Valve.h>
 
 class ValveTask : public Task {
@@ -14,7 +14,7 @@ class ValveTask : public Task {
  public:
   ValveTask(int valvePin, Status* state);
   void init(int period);
-  void tick();
+  void run();
 };
 
 #endif
