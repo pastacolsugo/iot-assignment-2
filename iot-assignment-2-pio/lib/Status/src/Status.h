@@ -9,6 +9,7 @@ class Status {
   Light lamp;
   Control valve;
   int waterLevel;
+  int valveDegree;
 
  public:
   Status();
@@ -23,6 +24,7 @@ class Status {
   void setWater(int lv);
 
   Control getValve();
+  int getValveDegree();
 
   bool matchStateStatus(State st);
   bool matchLampStatus(Light lg);

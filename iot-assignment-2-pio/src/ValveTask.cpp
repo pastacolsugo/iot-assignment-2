@@ -1,9 +1,6 @@
 
+#include "Parameters.h"
 #include "ValveTask.h"
-
-#define WL1 100
-#define WL2 300
-#define BH 1000
 
 ValveTask::ValveTask(int valvePin, Status* state) {
   this->valve_pin = valvePin;
@@ -17,7 +14,7 @@ void ValveTask::init(int period) {
 
 void ValveTask::run() {
   if (status->matchStateStatus(State::ALARM)) {
-    valve->setPosition(map(status->getWater(), WL2, BH, 0, 180));
+    valve->setPosition(map(status->getWater(), WATER_LEVEL_2, WATER_LEVEL_MAX, 0, 180));
 
   } else if (status->matchValveStatus(Control::MANUAL)) {
     valve->setPosition(180);

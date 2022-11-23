@@ -1,8 +1,6 @@
 
+#include "Parameters.h"
 #include "LampTask.h"
-
-#define THL 10
-#define T1 1000
 
 LampTask::LampTask(int led, int pir, int photo, Status* state) {
   this->led_pin = led;
@@ -32,12 +30,12 @@ void LampTask::run() {
     return;
   }
 
-  if (lightIntensity > THL) {
+  if (lightIntensity > LIGHT_THRESHOLD__LEVEL) {
     turnOff();
     return;
   }
 
-  if (time_now - timeOfLastDetectedMovement >= T1) {
+  if (time_now - timeOfLastDetectedMovement >= LAMP_TIMEOUT) {
     turnOff();
     return;
   }

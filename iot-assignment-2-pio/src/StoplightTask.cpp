@@ -1,6 +1,6 @@
-#include "StoplightTask.h"
 
-#define PERIOD_TASK 1000
+#include "Parameters.h"
+#include "StoplightTask.h"
 
 StoplightTask::StoplightTask(int red_pin, int green_pin, Status* status) {
   this->redled_pin = red_pin;
@@ -8,7 +8,7 @@ StoplightTask::StoplightTask(int red_pin, int green_pin, Status* status) {
   this->status = status;
 }
 
-void StoplightTask::init() { StoplightTask::init(PERIOD_TASK); }
+void StoplightTask::init() { StoplightTask::init(STOPLIGHT_TASK_PERIOD); }
 
 void StoplightTask::init(int period) {
   Task::init(period);

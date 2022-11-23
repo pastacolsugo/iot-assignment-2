@@ -1,12 +1,5 @@
-#include <SonarTask.h>
-
-#define WL1 100
-#define WL2 300
-#define WLMAX 1000
-
-#define PERIOD_TASK_NORMAL 50
-#define PERIOD_TASK_PREALARM 30
-#define PERIOD_TASK_ALARM 10
+#include "Parameters.h"
+#include "SonarTask.h"
 
 SonarTask::SonarTask(int trig_pin, int echo_pin, Status* state) {
   this->echo_pin = echo_pin;
@@ -14,7 +7,7 @@ SonarTask::SonarTask(int trig_pin, int echo_pin, Status* state) {
   this->status = state;
 }
 
-void SonarTask::init() { SonarTask::init(PERIOD_TASK_NORMAL); }
+void SonarTask::init() { SonarTask::init(SONAR_TASK_PERIOD_NORMAL); }
 
 void SonarTask::init(int period) {
   Task::init(period);
@@ -23,21 +16,21 @@ void SonarTask::init(int period) {
 
 void SonarTask::run() {
   int sonarReading = sonar->getDistance();
-  int waterLevel = (WLMAX < sonarReading) ? WLMAX : WLMAX - sonarReading;
+  int waterLevel = (WATER_LEVEL_MAX < sonarReading) ? WATER_LEVEL_MAX : WATER_LEVEL_MAX - sonarReading;
   status->setWater(waterLevel);
 
-  if (waterLevel > WL2) {
+  if (waterLevel > WATER_LEVEL_2) {
     status->setState(State::ALARM);
-    setPeriod(PERIOD_TASK_ALARM);
+    setPeriod(SONAR_TASK_PERIOD_ALARM);
     return;
   }
 
-  if (waterLevel > WL1) {
+  if (waterLevel > WATER_LEVEL_1) {
     status->setState(State::PREALARM);
-    setPeriod(PERIOD_TASK_PREALARM);
+    setPeriod(SONAR_TASK_PERIOD_PREALARM);
     return;
   }
 
   status->setState(State::NORMAL);
-  setPeriod(PERIOD_TASK_NORMAL);
+  setPeriod(SONAR_TASK_PERIOD_NORMAL);
 }
