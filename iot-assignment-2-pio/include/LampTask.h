@@ -2,15 +2,20 @@
 #define __LAMPTASK__
 
 #include <Arduino.h>
-#include <Task.h>
-#include <Status.h>
 #include <Led.h>
-#include <Pir.h>
 #include <Photoresistor.h>
+#include <Pir.h>
+#include <Status.h>
+#include <Task.h>
 
 class LampTask : public Task {
+ public:
+  LampTask(int led, int pir, int photo, Status* state);
+  void init(int period);
+  void run();
+
  private:
-  long long time;
+  long long timeOfLastDetectedMovement;
   int led_pin;
   int pir_pin;
   int photo_pin;
@@ -19,10 +24,17 @@ class LampTask : public Task {
   Pir* pir;
   Photoresistor* photo;
 
- public:
-  LampTask(int led, int pir, int photo, Status* state);
-  void init(int period);
-  void run();
+  void turnOff() {
+    led->switchOff();
+    status->setLamp(Light::OFF);
+    return;
+  }
+
+  void turnOn() {
+    led->switchOn();
+    status->setLamp(Light::ON);
+    return;
+  }
 };
 
 #endif
