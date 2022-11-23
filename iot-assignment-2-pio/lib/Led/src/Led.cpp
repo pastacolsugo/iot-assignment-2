@@ -11,3 +11,5 @@ Led::Led(int pin) {
 void Led::switchOn() { digitalWrite(pin, HIGH); }
 
 void Led::switchOff() { digitalWrite(pin, LOW); }
+
+void Led::toggle() { digitalWrite(pin, !digitalRead(pin)); }

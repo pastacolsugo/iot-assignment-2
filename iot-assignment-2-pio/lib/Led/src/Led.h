@@ -6,10 +6,9 @@ class Led {
   Led(int pin);
   void switchOn();
   void switchOff();
-  void blink();
+  void toggle();
 
  private:
-  long t;
   int pin;
 };
 
