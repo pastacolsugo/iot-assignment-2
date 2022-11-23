@@ -21,7 +21,7 @@ void SonarTask::init(int period) {
   this->sonar = new Sonar(trig_pin, echo_pin);
 }
 
-void SonarTask::tick() {
+void SonarTask::run() {
   int sonarReading = sonar->getDistance();
   int waterLevel = (WLMAX < sonarReading) ? WLMAX : WLMAX - sonarReading;
   status->setWater(waterLevel);
