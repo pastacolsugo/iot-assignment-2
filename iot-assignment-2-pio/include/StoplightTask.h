@@ -1,5 +1,5 @@
-#ifndef __STOPLIGHTASK__
-#define __STOPLIGHTASK__
+#ifndef __STOPLIGHTTASK__
+#define __STOPLIGHTTASK__
 
 #include <Task.h>
 #include <Status.h>
