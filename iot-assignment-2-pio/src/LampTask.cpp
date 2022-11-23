@@ -1,8 +1,6 @@
 
 #include "LampTask.h"
 
-#include <Arduino.h>
-
 #define THl 10
 #define T1 1000
 
@@ -21,8 +19,6 @@ void LampTask::init(int period) {
 }
 
 void LampTask::run() {
-  Serial.println("detected00");
-
   bool isMotionDetected = pir->detectedMotion();
   auto lightIntensity = photo->getIntensity();
 
@@ -30,7 +26,7 @@ void LampTask::run() {
     this->time = millis();
   }
   if (isMotionDetected and lightIntensity < THl and
-      status == Light::OFF and
+      status->matchLampStatus(Light::OFF) and
       (status->matchStateStatus(State::NORMAL) or
        status->matchStateStatus(State::PREALARM))) {
 
