@@ -9,18 +9,18 @@
 #define LS A0
 #define P 2
 
-Scheduler sched;
+Scheduler scheduler;
 
 void setup() {
-  sched.init(50);  // modified as best
+  scheduler.init(50);  // Period to be adjusted 
 
-  Status* st = new Status();
+  Status* status = new Status();
 
   // possono essere aggiunti in un array di task -- opzionale dato che sono solo
   // 2
-  Task* lamp = new LampTask(LA, P, LS, st);
+  Task* lamp = new LampTask(LA, P, LS, status);
   lamp->init(50);
-  sched.addTask(lamp);
+  scheduler.addTask(lamp);
 
   /*
   Task* valve = new ValveTask(...);
@@ -29,4 +29,4 @@ void setup() {
   */
 }
 
-void loop() { sched.schedule(); }
+void loop() { scheduler.schedule(); }
