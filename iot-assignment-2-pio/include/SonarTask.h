@@ -1,8 +1,9 @@
 #ifndef __SONARTASK__
 #define __SONARTASK__
 
-#include <Sonar.h>
 #include <Task.h>
+#include <Sonar.h>
+#include <Status.h>
 
 class SonarTask : public Task {
  private:
@@ -13,6 +14,7 @@ class SonarTask : public Task {
 
  public:
   SonarTask(int trig, int echo, Status* state);
+  void init();
   void init(int period);
   void tick();
 };

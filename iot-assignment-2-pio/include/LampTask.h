@@ -1,11 +1,12 @@
 #ifndef __LAMPTASK__
 #define __LAMPTASK__
 
-#include <Led.h>
-#include <Photoresistor.h>
-#include <Pir.h>
+#include <Arduino.h>
 #include <Task.h>
-#include <Timer.h>
+#include <Status.h>
+#include <Led.h>
+#include <Pir.h>
+#include <Photoresistor.h>
 
 class LampTask : public Task {
  private:
@@ -13,10 +14,10 @@ class LampTask : public Task {
   int led_pin;
   int pir_pin;
   int photo_pin;
+  Status* status;
   Led* led;
   Pir* pir;
   Photoresistor* photo;
-  Status* status;
 
  public:
   LampTask(int led, int pir, int photo, Status* state);
