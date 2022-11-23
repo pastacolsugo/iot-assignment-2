@@ -1,9 +1,9 @@
 #ifndef __SONARTASK__
 #define __SONARTASK__
 
-#include <Task.h>
 #include <Sonar.h>
 #include <Status.h>
+#include <Task.h>
 
 class SonarTask : public Task {
  private:
