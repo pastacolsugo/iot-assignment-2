@@ -12,7 +12,7 @@
 Scheduler scheduler;
 
 void setup() {
-  scheduler.init(50);  // Period to be adjusted 
+  scheduler.init(50);  // Period to be adjusted
 
   Status* status = new Status();
 
