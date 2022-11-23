@@ -13,10 +13,10 @@ class SonarTask : public Task {
   Status* status;
 
  public:
-  SonarTask(int trig, int echo, Status* state);
+  SonarTask(int trig_pin, int echo_pin, Status* state);
   void init();
   void init(int period);
-  void tick();
+  void run();
 };
 
 #endif
