@@ -21,29 +21,27 @@ void LampTask::init(int period) {
 void LampTask::run() {
   bool isMotionDetected = pir->detectedMotion();
   auto lightIntensity = photo->getIntensity();
+  long long time_now = millis();
 
   if (isMotionDetected) {
-    this->time = millis();
+    this->timeOfLastDetectedMovement = time_now;
   }
-  if (isMotionDetected and lightIntensity < THL and
-      status->matchLampStatus(Light::OFF) and
-      (status->matchStateStatus(State::NORMAL) or
-       status->matchStateStatus(State::PREALARM))) {
 
-       }
+  if (status->getState() == State::ALARM) {
+    turnOff();
+    return;
+  }
 
-    if ((pir->detectedMotion() ? this->time = millis() : false) &&
-        lightIntensity < THL && status->matchLampStatus(Light::OFF) &&
-        (status->matchStateStatus(State::NORMAL) ||
-         status->matchStateStatus(State::PREALARM))) {
-      // Serial.println("detected");
-      led->switchOn();
-      status->setLamp(Light::ON);
+  if (lightIntensity > THL) {
+    turnOff();
+    return;
+  }
 
-    } else if (status->matchLampStatus(Light::ON) &&
-               (lightIntensity > THL || millis() - time >= T1 ||
-                status->matchStateStatus(State::ALARM))) {
-      led->switchOff();
-      status->setLamp(Light::OFF);
-    }
+  if (time_now - timeOfLastDetectedMovement >= T1) {
+    turnOff();
+    return;
+  }
+
+  turnOn();
+  return;
 }
