@@ -1,15 +1,9 @@
 
 #include "ValveTask.h"
 
-#include <Arduino.h>
-
 #define WL1 100
 #define WL2 300
 #define BH 1000
-
-#define PEN 50
-#define PEP 30
-#define PEA 10
 
 ValveTask::ValveTask(int valvePin, Status* state) {
   this->valve_pin = valvePin;
