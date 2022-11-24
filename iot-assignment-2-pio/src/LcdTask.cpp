@@ -16,7 +16,7 @@ void LcdTask::printWater(){
 void LcdTask::printValve(){
         lcd->setCursor(0, 2);
         lcd->print("Valve: ");
-        lcd->print(status->getValveDegree());
+        lcd->print(status->getValvePosition());
 }
 
 void LcdTask::run(){
@@ -27,17 +27,17 @@ void LcdTask::run(){
     switch (status->getState())
     {
     case ALARM:
-        lcd->print("ALARM");
-        printWater();
-        printValve();
-        break;
+      lcd->print("ALARM");
+      printWater();
+      printValve();
+      break;
 
     case PREALARM:
-        lcd->print("PREALARM ");
-        break;
-    
+      lcd->print("PREALARM ");
+      break;
+
     default:
-        lcd->print("NORMAL");
-        break;
-    }
+      lcd->print("NORMAL");
+      break;
+  }
 }

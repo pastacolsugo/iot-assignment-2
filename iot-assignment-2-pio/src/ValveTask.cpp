@@ -1,6 +1,6 @@
-
-#include "Parameters.h"
 #include "ValveTask.h"
+
+#include <Parameters.h>
 
 ValveTask::ValveTask(int valve_pin, Status* state) {
   this->valve = new Valve(valve_pin);
@@ -8,12 +8,20 @@ ValveTask::ValveTask(int valve_pin, Status* state) {
 }
 
 void ValveTask::run() {
-  if (status->matchStateStatus(State::ALARM)) {
-    valve->setPosition(map(status->getWater(), WATER_LEVEL_2, WATER_LEVEL_MAX, 0, 180));
+  if (status->getState() == State::ALARM) {
+    if (status->getValveControl() == Control::MANUAL) {
+      valve->setPosition(status->getManualValvePosition());
+      return;
+    }
 
-  } else if (status->matchValveStatus(Control::MANUAL)) {
-    valve->setPosition(180);
-    // COME ELABORO LA SERIALE? FACCIO LA LETTURA QUA o SALVO
-    // VARIABILE IN STATO? O ELABORO IN TASKMANUAL?
+    int position =
+        map(status->getWater(), WATER_LEVEL_2, WATER_LEVEL_MAX, 0, 180);
+    valve->setPosition(position);
+    status->setValvePosition(position);
+    return;
   }
+
+  status->setAutoValvePosition(0);
+  valve->setPosition(0);
+  return;
 }
