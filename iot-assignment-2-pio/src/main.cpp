@@ -1,10 +1,13 @@
 #include <Arduino.h>
 
-#include "LampTask.h"
 #include "Scheduler.h"
 #include "Status.h"
+#include "Pins.h"
+
+#include "LampTask.h"
 #include "ValveTask.h"
-#include <Pins.h>
+#include "SonarTask.h"
+
 
 Scheduler scheduler;
 
@@ -20,6 +23,10 @@ void setup() {
   Task* valve = new ValveTask(SERVO, status);
   valve->init(50);
   scheduler.addTask(valve);
+
+  Task* sonar = new SonarTask(SONAR_TRIG, SONAR_ECHO, status);
+  sonar->init(50);
+  scheduler.addTask(sonar);
   
 }
 
