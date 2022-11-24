@@ -7,7 +7,8 @@ class LcdTask: public Task{
     private:
         Status* status;
         LiquidCrystal_I2C* lcd;
-;
+        void printWater();
+        void printValve();
 
     public:
         LcdTask(Status* st);
