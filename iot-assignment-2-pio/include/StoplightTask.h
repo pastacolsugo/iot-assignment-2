@@ -15,8 +15,6 @@ class StoplightTask : public Task {
 
  public:
   StoplightTask(int red_pin, int green_pin, Status* status);
-  void init(int period);
-  void init();
   void run();
 };
 
