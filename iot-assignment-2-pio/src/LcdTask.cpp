@@ -16,7 +16,7 @@ void LcdTask::printWater(){
 void LcdTask::printValve(){
         lcd->setCursor(0, 2);
         lcd->print("Valve: ");
-        lcd->print(status->getValveDegree());
+        lcd->print(status->getValvePosition());
 }
 
 void LcdTask::run(){
