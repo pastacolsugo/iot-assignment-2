@@ -1,4 +1,3 @@
-//#include "Parameters.h"
 #include "ButtonTask.h"
 #include <Status.h>
 
@@ -9,9 +8,7 @@ ButtonTask::ButtonTask(int button_pin, int pot_pin, Status* state){
 }
 
 void ButtonTask::run(){
-    if(button->isPressed() && status->getState() == Control::AUTO){
-        status->setState(Control::MANUAL);
-    }else if(button->isPressed() && status->getState() == Control::MANUAL){
-
+    if(button->isPressed()){
+        status->setValveControl( status->getValveControl() == Control::AUTO ? Control::MANUAL : Control::AUTO );
     }
 }
