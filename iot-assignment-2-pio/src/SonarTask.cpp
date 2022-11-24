@@ -2,16 +2,8 @@
 #include "SonarTask.h"
 
 SonarTask::SonarTask(int trig_pin, int echo_pin, Status* state) {
-  this->echo_pin = echo_pin;
-  this->trig_pin = trig_pin;
-  this->status = state;
-}
-
-void SonarTask::init() { SonarTask::init(SONAR_TASK_PERIOD_NORMAL); }
-
-void SonarTask::init(int period) {
-  Task::init(period);
   this->sonar = new Sonar(trig_pin, echo_pin);
+  this->status = state;
 }
 
 void SonarTask::run() {

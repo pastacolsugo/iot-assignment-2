@@ -3,6 +3,7 @@
 #include "Scheduler.h"
 #include "Status.h"
 #include "Pins.h"
+#include "Parameters.h"
 
 #include "LampTask.h"
 #include "ValveTask.h"
@@ -25,7 +26,7 @@ void setup() {
   scheduler.addTask(valve);
 
   Task* sonar = new SonarTask(SONAR_TRIG, SONAR_ECHO, status);
-  sonar->init(50);
+  sonar->init(SONAR_TASK_PERIOD_NORMAL);
   scheduler.addTask(sonar);
   
 }
