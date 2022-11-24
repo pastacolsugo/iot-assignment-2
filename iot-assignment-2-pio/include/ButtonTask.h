@@ -8,13 +8,12 @@
 
 class ButtonTask : public Task {    
 public:
-    ButtonTask(int button_pin, int pot_pin, Status* state);
+    ButtonTask(int button_pin, Status* state);
     void run();
 
 private:
     Status* status;
     Button* button;
-    //Potenziometer* potenziometer;
 };
 
 #endif

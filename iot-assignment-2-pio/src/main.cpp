@@ -10,7 +10,7 @@
 #include "SonarTask.h"
 #include "StoplightTask.h"
 #include "LcdTask.h"
-#include "ManualTask.h"
+#include "ButtonTask.h"
 
 
 Scheduler scheduler;
@@ -40,9 +40,9 @@ void setup() {
   lcd->init(LCD_TASK_PERIOD);
   scheduler.addTask(lcd);
 
-  Task* manual = new ManualTask(BUTTON, POTENZIOMETER, status);
-  manual->init(MANUAL_TASK_PERIOD);
-  scheduler.addTask(manual);
+  Task* button = new ButtonTask(BUTTON, status);
+  button->init(BUTTON_TASK_PERIOD);
+  scheduler.addTask(button);
   
 }
 
