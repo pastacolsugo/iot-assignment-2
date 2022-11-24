@@ -27,17 +27,17 @@ void LcdTask::run(){
     switch (status->getState())
     {
     case ALARM:
-        lcd->print("ALARM");
-        printWater();
-        printValve();
-        break;
+      lcd->print("ALARM");
+      printWater();
+      printValve();
+      break;
 
     case PREALARM:
-        lcd->print("PREALARM ");
-        break;
-    
+      lcd->print("PREALARM ");
+      break;
+
     default:
-        lcd->print("NORMAL");
-        break;
-    }
+      lcd->print("NORMAL");
+      break;
+  }
 }
