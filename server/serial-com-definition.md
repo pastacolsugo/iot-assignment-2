@@ -5,43 +5,43 @@ Baud 115200
 ## Messages from Arduino
 
 ```
-lights: on
+lights:on
 ```
 
 ```
-lights: off
+lights:off
 ```
 
 ```
-status: normal
+status:normal
 ```
 
 ```
-status: prealarm
+status:prealarm
 ```
 
 ```
-status: alarm
+status:alarm
 ```
 
 ```
-water_level: 100
+water_level:100
 ```
 
 ## Messages to Arduino
 
 ```
-set_control: auto
+set_control:auto
 ```
 
 ```
-set_control: manual
+set_control:manual
 ```
 
 ```
-set_valve: 0
+set_valve:0
 ```
 
 ```
-set_valve: 180
+set_valve:180
 ```
