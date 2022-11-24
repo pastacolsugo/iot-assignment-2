@@ -12,7 +12,6 @@ class LcdTask: public Task{
 
     public:
         LcdTask(Status* st);
-        void init();
         void run();
 
 };

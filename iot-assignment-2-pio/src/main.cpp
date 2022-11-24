@@ -9,6 +9,7 @@
 #include "ValveTask.h"
 #include "SonarTask.h"
 #include "StoplightTask.h"
+#include "LcdTask.h"
 
 
 Scheduler scheduler;
@@ -34,11 +35,9 @@ void setup() {
   stoplight->init(STOPLIGHT_TASK_PERIOD);
   scheduler.addTask(stoplight);
 
-  /*
-  Task* lcd = new StoplightTask(status);
-  lcd->init();
+  Task* lcd = new LcdTask(status);
+  lcd->init(LCD_TASK_PERIOD);
   scheduler.addTask(lcd);
-  */
   
 }
 
