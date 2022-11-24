@@ -16,7 +16,7 @@
 #define LCD_SDA A4
 #define LCD_SCL A5
 
-#define BUTTON 10
+#define BUTTON 3    //to use interrupts
 #define POTENZIOMETER A1
 
 #define SERVO 9
