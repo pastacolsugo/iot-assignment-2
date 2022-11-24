@@ -12,7 +12,6 @@ class ValveTask : public Task {
 
  public:
   ValveTask(int valve_pin, Status* state);
-  void init(int period);
   void run();
 };
 

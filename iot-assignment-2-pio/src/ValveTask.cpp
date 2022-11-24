@@ -7,10 +7,6 @@ ValveTask::ValveTask(int valve_pin, Status* state) {
   this->status = state;
 }
 
-void ValveTask::init(int period) {
-  Task::init(period);
-}
-
 void ValveTask::run() {
   if (status->matchStateStatus(State::ALARM)) {
     valve->setPosition(map(status->getWater(), WATER_LEVEL_2, WATER_LEVEL_MAX, 0, 180));
