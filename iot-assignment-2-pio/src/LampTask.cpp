@@ -2,24 +2,21 @@
 #include "Parameters.h"
 #include "LampTask.h"
 
-LampTask::LampTask(int led, int pir, int photo, Status* state) {
-  this->led_pin = led;
-  this->pir_pin = pir;
-  this->photo_pin = photo;
+LampTask::LampTask(int led_pin, int pir_pin, int photo_pin, Status* state) {
   this->status = state;
+  this->led = new Led(led_pin);
+  this->pir = new Pir(pir_pin);
+  this->photo = new Photoresistor(photo_pin);
 }
 
 void LampTask::init(int period) {
   Task::init(period);
-  led = new Led(led_pin);
-  pir = new Pir(pir_pin);
-  photo = new Photoresistor(photo_pin);
 }
 
 void LampTask::run() {
   bool isMotionDetected = pir->detectedMotion();
   auto lightIntensity = photo->getIntensity();
-  long long time_now = millis();
+  unsigned long time_now = millis();
 
   if (isMotionDetected) {
     this->timeOfLastDetectedMovement = time_now;

@@ -4,10 +4,7 @@
 #include "Scheduler.h"
 #include "Status.h"
 #include "ValveTask.h"
-
-#define LA 13
-#define LS A0
-#define P 2
+#include <Pins.h>
 
 Scheduler scheduler;
 
@@ -16,9 +13,7 @@ void setup() {
 
   Status* status = new Status();
 
-  // possono essere aggiunti in un array di task -- opzionale dato che sono solo
-  // 2
-  Task* lamp = new LampTask(LA, P, LS, status);
+  Task* lamp = new LampTask(LED_LAMP, PIR, PHOTORESISTOR,  status);
   lamp->init(50);
   scheduler.addTask(lamp);
 

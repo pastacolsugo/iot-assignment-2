@@ -16,9 +16,6 @@ class LampTask : public Task {
 
  private:
   long long timeOfLastDetectedMovement;
-  int led_pin;
-  int pir_pin;
-  int photo_pin;
   Status* status;
   Led* led;
   Pir* pir;
