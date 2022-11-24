@@ -15,16 +15,16 @@
 Scheduler scheduler;
 
 void setup() {
-  scheduler.init(50);  // Period to be adjusted
+  scheduler.init(SCHDULER_PERIOD);
 
   Status* status = new Status();
 
   Task* lamp = new LampTask(LED_LAMP, PIR, PHOTORESISTOR,  status);
-  lamp->init(50);
+  lamp->init(LAMP_TASK_PERIOD);
   scheduler.addTask(lamp);
 
   Task* valve = new ValveTask(SERVO, status);
-  valve->init(50);
+  valve->init(VALVE_TASK_PERIOD);
   scheduler.addTask(valve);
 
   Task* sonar = new SonarTask(SONAR_TRIG, SONAR_ECHO, status);

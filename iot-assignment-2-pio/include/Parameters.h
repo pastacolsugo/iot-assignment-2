@@ -1,17 +1,18 @@
 #ifndef __PARAMETERS__
 #define __PARAMETERS__
 
-// Used into LampTask.cpp
-#define LIGHT_THRESHOLD__LEVEL 10
-#define LAMP_TIMEOUT 1000
-
-// Used into SonarTask.cpp
+#define SCHDULER_PERIOD 50
+#define LAMP_TASK_PERIOD 50
+#define VALVE_TASK_PERIOD 50
 #define SONAR_TASK_PERIOD_NORMAL 50
 #define SONAR_TASK_PERIOD_PREALARM 30
 #define SONAR_TASK_PERIOD_ALARM 10
-
-// Used into Stoplight.cpp
 #define STOPLIGHT_TASK_PERIOD 1000
+#define LCD_TASK_PERIOD 50
+
+// Used into LampTask.cpp
+#define LIGHT_THRESHOLD__LEVEL 10
+#define LAMP_TIMEOUT 1000
 
 // Used into ValveTask.cpp and SonarTask.cpp
 #define WATER_LEVEL_1 100
