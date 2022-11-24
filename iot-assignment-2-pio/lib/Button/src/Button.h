@@ -4,7 +4,7 @@
 class Button {
  public:
   Button(int pin);
-  //void isPressed();
+  virtual bool isPressed() = 0;
 
  private:
   int pin;
