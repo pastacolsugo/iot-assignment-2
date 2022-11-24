@@ -17,11 +17,10 @@ void setup() {
   lamp->init(50);
   scheduler.addTask(lamp);
 
-  /*
-  Task* valve = new ValveTask(...);
-  valve->init(...);
-  sched.addTask(valve);
-  */
+  Task* valve = new ValveTask(SERVO, status);
+  valve->init(50);
+  scheduler.addTask(valve);
+  
 }
 
 void loop() { scheduler.schedule(); }

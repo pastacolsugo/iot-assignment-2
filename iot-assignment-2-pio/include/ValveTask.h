@@ -7,12 +7,11 @@
 #include <Valve.h>
 
 class ValveTask : public Task {
-  int valve_pin;
   Valve* valve;
   Status* status;
 
  public:
-  ValveTask(int valvePin, Status* state);
+  ValveTask(int valve_pin, Status* state);
   void init(int period);
   void run();
 };

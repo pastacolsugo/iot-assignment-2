@@ -2,14 +2,13 @@
 #include "Parameters.h"
 #include "ValveTask.h"
 
-ValveTask::ValveTask(int valvePin, Status* state) {
-  this->valve_pin = valvePin;
+ValveTask::ValveTask(int valve_pin, Status* state) {
+  this->valve = new Valve(valve_pin);
   this->status = state;
 }
 
 void ValveTask::init(int period) {
   Task::init(period);
-  valve = new Valve(this->valve_pin);
 }
 
 void ValveTask::run() {
