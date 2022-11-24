@@ -25,6 +25,7 @@ void Status::setValvePosition(int pos) {
   this->valvePosition = pos;
 }
 
+void Status::setValveControl(const Control &c) { this->valveControl = c; }
 Control Status::getValveControl() { return this->valveControl; }
 
 ManualControlSource Status::getManualControlSource() {

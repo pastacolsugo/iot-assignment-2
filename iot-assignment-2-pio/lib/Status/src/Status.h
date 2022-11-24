@@ -27,6 +27,7 @@ class Status {
   int getWater();
   void setWater(int lv);
 
+  void setValveControl(const Control &c);
   Control getValveControl();
   ManualControlSource getManualControlSource();
   int getValvePosition();
