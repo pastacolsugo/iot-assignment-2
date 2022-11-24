@@ -9,10 +9,6 @@ LampTask::LampTask(int led_pin, int pir_pin, int photo_pin, Status* state) {
   this->photo = new Photoresistor(photo_pin);
 }
 
-void LampTask::init(int period) {
-  Task::init(period);
-}
-
 void LampTask::run() {
   bool isMotionDetected = pir->detectedMotion();
   auto lightIntensity = photo->getIntensity();
