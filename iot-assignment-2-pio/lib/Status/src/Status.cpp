@@ -9,12 +9,13 @@ Status::Status() {
 }
 
 State Status::getState() { return this->state; }
+void Status::setState(State s) { this->state = s; }
 
 Light Status::getLamp() { return this->lamp; }
-
 void Status::setLamp(Light lv) { this->lamp = lv; }
 
 int Status::getWater() { return this->waterLevel; }
+void Status::setWater(int w) { this->waterLevel = w; }
 
 int Status::getValvePosition() { return this->valvePosition; }
 
