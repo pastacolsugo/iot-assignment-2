@@ -10,7 +10,7 @@
 #include "SonarTask.h"
 #include "StoplightTask.h"
 #include "LcdTask.h"
-#include "Button.h"
+#include "PotenziometerTask.h"
 
 
 Scheduler scheduler;
@@ -40,8 +40,8 @@ void setup() {
   lcd->init(LCD_TASK_PERIOD);
   scheduler.addTask(lcd);
 
-  Task* potenziometer = new PotenziometerTask(BUTTON, status);
-  potenziometer->init(BUTTON_TASK_PERIOD);
+  Task* potenziometer = new PotenziometerTask(POTENZIOMETER, status);
+  potenziometer->init(POTENZIOMETER_TASK_PERIOD);
   scheduler.addTask(potenziometer);
   
   attachInterrupt(digitalPinToInterrupt(BUTTON), isPressed, RISING);

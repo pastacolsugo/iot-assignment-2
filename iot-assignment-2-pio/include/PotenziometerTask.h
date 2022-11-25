@@ -3,15 +3,16 @@
 
 #include <Status.h>
 #include <Task.h>
+#include <Potenziometer.h>
 
-class ButtonTask : public Task {    
+class PotenziometerTask : public Task {    
 public:
-    ButtonTask(int pot_pin, Status* state);
+    PotenziometerTask(int pot_pin, Status* state);
     void run();
 
 private:
     Status* status;
-    //Potenziometer* pot;
+    Potenziometer* pot;
 };
 
 #endif
