@@ -4,6 +4,7 @@
 class Potenziometer {
  public:
   Potenziometer(int pin);
+  int read();
 
  private:
   int pin;

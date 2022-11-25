@@ -7,5 +7,7 @@ PotenziometerTask::PotenziometerTask(int pot_pin, Status* state){
 }
 
 void PotenziometerTask::run(){
-
+    if(status->getValveControl() == Control::MANUAL){
+        status->setManualValvePosition(pot->read());
+    }
 }
