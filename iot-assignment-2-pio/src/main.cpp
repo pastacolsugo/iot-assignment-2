@@ -10,15 +10,15 @@
 #include "SonarTask.h"
 #include "StoplightTask.h"
 #include "LcdTask.h"
-#include "ButtonTask.h"
+#include "Button.h"
 
 
 Scheduler scheduler;
+Status* status = new Status();
 
 void setup() {
   scheduler.init(SCHDULER_PERIOD);
 
-  Status* status = new Status();
 
   Task* lamp = new LampTask(LED_LAMP, PIR, PHOTORESISTOR,  status);
   lamp->init(LAMP_TASK_PERIOD);
@@ -40,10 +40,15 @@ void setup() {
   lcd->init(LCD_TASK_PERIOD);
   scheduler.addTask(lcd);
 
-  Task* button = new ButtonTask(BUTTON, status);
-  button->init(BUTTON_TASK_PERIOD);
-  scheduler.addTask(button);
+  Task* potenziometer = new PotenziometerTask(BUTTON, status);
+  potenziometer->init(BUTTON_TASK_PERIOD);
+  scheduler.addTask(potenziometer);
   
+  attachInterrupt(digitalPinToInterrupt(BUTTON), isPressed, RISING);
 }
 
 void loop() { scheduler.schedule(); }
+
+void isPressed(){
+  status->setValveControl( status->getValveControl() == Control::AUTO ? Control::MANUAL : Control::AUTO );
+}
