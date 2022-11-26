@@ -1,5 +1,5 @@
-#include "Valve.h"
 #include <Arduino.h>
+#include <Valve.h>
 
 Valve::Valve(int pin) {
   this->pin = pin;

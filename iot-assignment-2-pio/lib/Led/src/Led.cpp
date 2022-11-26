@@ -1,5 +1,7 @@
-#include "Led.h"
 #include <Arduino.h>
+#include <Led.h>
+
+#define BlinkTime 1000
 
 Led::Led(int pin) {
   this->pin = pin;
