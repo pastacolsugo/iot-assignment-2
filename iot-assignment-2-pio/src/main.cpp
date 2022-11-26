@@ -15,10 +15,10 @@
 
 Scheduler scheduler;
 Status* status = new Status();
+void isPressed();
 
 void setup() {
   scheduler.init(SCHDULER_PERIOD);
-
 
   Task* lamp = new LampTask(LED_LAMP, PIR, PHOTORESISTOR,  status);
   lamp->init(LAMP_TASK_PERIOD);
