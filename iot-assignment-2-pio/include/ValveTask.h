@@ -5,6 +5,7 @@
 #include <Status.h>
 #include <Task.h>
 #include <Valve.h>
+#include "Parameters.h"
 
 class ValveTask : public Task {
   Valve* valve;

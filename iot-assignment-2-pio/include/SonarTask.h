@@ -4,6 +4,7 @@
 #include <Sonar.h>
 #include <Status.h>
 #include <Task.h>
+#include "Parameters.h"
 
 class SonarTask : public Task {
  private:

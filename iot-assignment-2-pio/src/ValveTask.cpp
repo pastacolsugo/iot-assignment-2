@@ -1,7 +1,5 @@
 #include "ValveTask.h"
 
-#include <Parameters.h>
-
 ValveTask::ValveTask(int valve_pin, Status* state) {
   this->valve = new Valve(valve_pin);
   this->status = state;

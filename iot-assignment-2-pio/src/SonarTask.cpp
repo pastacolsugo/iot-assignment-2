@@ -1,6 +1,4 @@
-#include "Parameters.h"
 #include "SonarTask.h"
-
 #include <Arduino.h>
 
 SonarTask::SonarTask(int trig_pin, int echo_pin, Status* state) {

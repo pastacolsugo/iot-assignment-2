@@ -1,12 +1,12 @@
 #ifndef __LAMPTASK__
 #define __LAMPTASK__
 
-#include <Arduino.h>
 #include <Led.h>
 #include <Photoresistor.h>
 #include <Pir.h>
 #include <Status.h>
 #include <Task.h>
+#include "Parameters.h"
 
 class LampTask : public Task {
  public:

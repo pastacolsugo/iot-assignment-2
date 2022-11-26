@@ -1,6 +1,5 @@
-
-#include "Parameters.h"
 #include "LampTask.h"
+#include <Arduino.h>
 
 LampTask::LampTask(int led_pin, int pir_pin, int photo_pin, Status* state) {
   this->status = state;
