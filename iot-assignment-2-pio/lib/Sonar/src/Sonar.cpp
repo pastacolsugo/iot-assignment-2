@@ -18,9 +18,9 @@ float Sonar::getDistance() {
   digitalWrite(this->trigPin, LOW);
 
   /* ricevi l’eco */
-  long tUS = pulseInLong(this->echoPin, HIGH);
-  double t = tUS / 1000.0 / 1000.0 / 2;
-  double d = t * vs;
+  float tUS = pulseIn(this->echoPin, HIGH);
+  float t = tUS / 1000.0 / 1000.0 / 2;
+  float d = t * vs * 1000; // converti in mm se tieni WLMAX a 1000
 
   return d;
 }

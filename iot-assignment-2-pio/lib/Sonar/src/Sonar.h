@@ -14,7 +14,7 @@ class Sonar {
  private:
   int trigPin;
   int echoPin;
-  const double vs = 331.45 + 0.62 * 20;
+  const float vs = 331.45 + 0.62 * 20;
 };
 
 #endif

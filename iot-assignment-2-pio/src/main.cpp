@@ -20,6 +20,7 @@ void isPressed();
 void setup() {
   scheduler.init(SCHDULER_PERIOD);
 
+  /*
   Task* lamp = new LampTask(LED_LAMP, PIR, PHOTORESISTOR,  status);
   lamp->init(LAMP_TASK_PERIOD);
   scheduler.addTask(lamp);
@@ -28,10 +29,12 @@ void setup() {
   valve->init(VALVE_TASK_PERIOD);
   scheduler.addTask(valve);
 
+  */
   Task* sonar = new SonarTask(SONAR_TRIG, SONAR_ECHO, status);
   sonar->init(SONAR_TASK_PERIOD_NORMAL);
   scheduler.addTask(sonar);
 
+  /*
   Task* stoplight = new StoplightTask(LED_RED, LED_GREEN, status);
   stoplight->init(STOPLIGHT_TASK_PERIOD);
   scheduler.addTask(stoplight);
@@ -45,6 +48,7 @@ void setup() {
   scheduler.addTask(potenziometer);
   
   attachInterrupt(digitalPinToInterrupt(BUTTON), isPressed, RISING);
+  */
 }
 
 void loop() { scheduler.schedule(); }
