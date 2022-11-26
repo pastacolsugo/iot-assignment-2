@@ -34,11 +34,11 @@ void setup() {
   sonar->init(SONAR_TASK_PERIOD_NORMAL);
   scheduler.addTask(sonar);
 
-  /*
   Task* stoplight = new StoplightTask(LED_RED, LED_GREEN, status);
   stoplight->init(STOPLIGHT_TASK_PERIOD);
   scheduler.addTask(stoplight);
 
+  /*
   Task* lcd = new LcdTask(status);
   lcd->init(LCD_TASK_PERIOD);
   scheduler.addTask(lcd);

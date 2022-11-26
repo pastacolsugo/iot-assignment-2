@@ -4,11 +4,11 @@
 #include <Led.h>
 #include <Status.h>
 #include <Task.h>
+#include "Parameters.h"
 
 class StoplightTask : public Task {
  private:
-  int redled_pin;
-  int greenled_pin;
+  unsigned long time;
   Led* greenLed;
   Led* redLed;
   Status* status;
