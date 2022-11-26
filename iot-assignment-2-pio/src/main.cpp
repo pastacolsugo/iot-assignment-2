@@ -38,11 +38,11 @@ void setup() {
   stoplight->init(STOPLIGHT_TASK_PERIOD);
   scheduler.addTask(stoplight);
 
-  /*
   Task* lcd = new LcdTask(status);
   lcd->init(LCD_TASK_PERIOD);
   scheduler.addTask(lcd);
 
+  /*
   Task* potenziometer = new PotenziometerTask(POTENZIOMETER, status);
   potenziometer->init(POTENZIOMETER_TASK_PERIOD);
   scheduler.addTask(potenziometer);

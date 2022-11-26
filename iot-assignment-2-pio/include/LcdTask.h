@@ -9,6 +9,7 @@ class LcdTask: public Task{
         LiquidCrystal_I2C* lcd;
         void printWater();
         void printValve();
+        void printControl();
 
     public:
         LcdTask(Status* st);

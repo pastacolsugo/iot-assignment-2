@@ -19,6 +19,11 @@ void LcdTask::printValve(){
         lcd->print(status->getValvePosition());
 }
 
+void LcdTask::printControl(){
+        lcd->setCursor(5, 0);
+        lcd->print( status->getValveControl() == Control::AUTO ? " - AUTOMATICO" : " - MANUALE" );
+}
+
 void LcdTask::run(){
 
     lcd->clear();
@@ -28,16 +33,17 @@ void LcdTask::run(){
     {
     case ALARM:
       lcd->print("ALARM");
+      printControl();
       printWater();
-      printValve();
+      //printValve();   decomment when chek ValveTask
       break;
 
     case PREALARM:
       lcd->print("PREALARM ");
+      printWater();
       break;
 
     default:
       lcd->print("NORMAL");
-      break;
   }
 }
