@@ -19,12 +19,10 @@ void isPressed();
 void setup() {
   scheduler.init(SCHDULER_PERIOD);
 
-  /*
   Task* lamp = new LampTask(LED_LAMP, PIR, PHOTORESISTOR,  status);
   lamp->init(LAMP_TASK_PERIOD);
   scheduler.addTask(lamp);
-  */
-
+  
   /*TODO
   Task* valve = new ValveTask(SERVO, POTENZIOMETER, status);
   valve->init(VALVE_TASK_PERIOD);
@@ -53,5 +51,5 @@ void isPressed(){
     status->getValveControl() == Control::AUTO && status->getState() == State::ALARM ? 
       Control::MANUAL : Control::AUTO
   );
-  status->setManualControlSource(ManualControlSource::POT_CONTROL);   //da modificare con aggiunta di seriale
+  //status->setManualControlSource(ManualControlSource::POT_CONTROL);   //da modificare con aggiunta di seriale
 }

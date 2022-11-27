@@ -14,7 +14,7 @@ class LampTask : public Task {
   void run();
 
  private:
-  long long timeOfLastDetectedMovement;
+  unsigned long timeOfLastDetectedMovement = 0;
   Status* status;
   Led* led;
   Pir* pir;

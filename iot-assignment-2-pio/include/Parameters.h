@@ -12,7 +12,7 @@
 #define LCD_TASK_PERIOD 100
 
 // Used into LampTask.cpp
-#define LIGHT_THRESHOLD__LEVEL 10
+#define LIGHT_THRESHOLD__LEVEL 150
 #define LAMP_TIMEOUT 1000
 
 // Used into StoplightTask.cpp
@@ -21,7 +21,7 @@
 // Used into ValveTask.cpp and SonarTask.cpp
 #define WATER_LEVEL_1 600
 #define WATER_LEVEL_2 800
-#define WATER_LEVEL_MAX 1000
+#define WATER_LEVEL_MAX 3000
 
 // Used into LcdTask.cpp
 /* I2C address of the LCD: 0x27 */
