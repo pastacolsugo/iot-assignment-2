@@ -12,8 +12,10 @@ class Status {
 
   int waterLevel;
   int valvePosition;
+  /*
   int manualValvePosition;
   int autoValvePosition;
+  */
 
  public:
   Status();
@@ -27,10 +29,12 @@ class Status {
   int getWater();
   void setWater(int lv);
 
-  void setValveControl(const Control &c);
   Control getValveControl();
-  void Status::setManualControlSource(const ManualControlSource &s);
+  void setValveControl(const Control &c);
+  
   ManualControlSource getManualControlSource();
+  void setManualControlSource(const ManualControlSource &s);
+  
   int getValvePosition();
   void setValvePosition(int pos);
 

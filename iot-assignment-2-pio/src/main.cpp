@@ -10,7 +10,6 @@
 #include "SonarTask.h"
 #include "StoplightTask.h"
 #include "LcdTask.h"
-#include "PotenziometerTask.h"
 
 
 Scheduler scheduler;
@@ -24,12 +23,14 @@ void setup() {
   Task* lamp = new LampTask(LED_LAMP, PIR, PHOTORESISTOR,  status);
   lamp->init(LAMP_TASK_PERIOD);
   scheduler.addTask(lamp);
+  */
 
-  Task* valve = new ValveTask(SERVO, status);
+  /*TODO
+  Task* valve = new ValveTask(SERVO, POTENZIOMETER, status);
   valve->init(VALVE_TASK_PERIOD);
   scheduler.addTask(valve);
-
   */
+
   Task* sonar = new SonarTask(SONAR_TRIG, SONAR_ECHO, status);
   sonar->init(SONAR_TASK_PERIOD_NORMAL);
   scheduler.addTask(sonar);
@@ -41,18 +42,16 @@ void setup() {
   Task* lcd = new LcdTask(status);
   lcd->init(LCD_TASK_PERIOD);
   scheduler.addTask(lcd);
-
-  /*
-  Task* potenziometer = new PotenziometerTask(POTENZIOMETER, status);
-  potenziometer->init(POTENZIOMETER_TASK_PERIOD);
-  scheduler.addTask(potenziometer);
   
   attachInterrupt(digitalPinToInterrupt(BUTTON), isPressed, RISING);
-  */
 }
 
 void loop() { scheduler.schedule(); }
 
 void isPressed(){
-  status->setValveControl( status->getValveControl() == Control::AUTO ? Control::MANUAL : Control::AUTO );
+  status->setValveControl( 
+    status->getValveControl() == Control::AUTO && status->getState() == State::ALARM ? 
+      Control::MANUAL : Control::AUTO
+  );
+  status->setManualControlSource(ManualControlSource::POT_CONTROL);   //da modificare con aggiunta di seriale
 }
