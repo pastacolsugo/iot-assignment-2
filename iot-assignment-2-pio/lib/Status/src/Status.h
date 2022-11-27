@@ -29,6 +29,7 @@ class Status {
 
   void setValveControl(const Control &c);
   Control getValveControl();
+  void Status::setManualControlSource(const ManualControlSource &s);
   ManualControlSource getManualControlSource();
   int getValvePosition();
   void setValvePosition(int pos);
