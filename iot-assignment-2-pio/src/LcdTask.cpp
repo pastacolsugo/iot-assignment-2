@@ -11,13 +11,13 @@ void LcdTask::printWater(){
     lcd->setCursor(0, 1);
     lcd->print("Water: ");
     lcd->print(status->getWater());
+    lcd->print(" mm");
 }
 
 void LcdTask::printValve(){
-        lcd->setCursor(0, 2);
-        lcd->print("Valve: ");
-        lcd->print(status->getValvePosition());
-        lcd->print(" mm");
+    lcd->setCursor(0, 2);
+    lcd->print("Valve: ");
+    lcd->print(status->getValvePosition());
 }
 
 void LcdTask::printControl(){
@@ -36,7 +36,7 @@ void LcdTask::run(){
       lcd->print("ALARM");
       printControl();
       printWater();
-      //printValve();   decomment when chek ValveTask
+      printValve();
       break;
 
     case PREALARM:
