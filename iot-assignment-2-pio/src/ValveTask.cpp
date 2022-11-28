@@ -2,7 +2,7 @@
 
 ValveTask::ValveTask(int valve_pin, int pot_pin, Status* state) {
   this->valve = new Valve(valve_pin);
-  this->pot = new Potenziometer(pot_pin);
+  this->pot = new Potentiometer(pot_pin);
   this->status = state;
   this->valve->setPosition(0);
 }

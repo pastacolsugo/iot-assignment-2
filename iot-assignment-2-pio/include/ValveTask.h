@@ -10,7 +10,7 @@
 
 class ValveTask : public Task {
   Valve* valve;
-  Potenziometer* pot;
+  Potentiometer* pot;
   Status* status;
 
  public:
