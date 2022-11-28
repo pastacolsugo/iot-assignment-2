@@ -7,7 +7,6 @@ Valve::Valve(int pin) {
 }
 
 void Valve::setPosition(int pos) {
-  //controllo di pos gia fatto nella setValvePosition
-  valve.write(pos);
-  delay(15);
+  float coef = ((float)MAX_PULSE_WIDTH - (float)MIN_PULSE_WIDTH) / 180;
+  valve.write(MIN_PULSE_WIDTH + pos*coef);
 }

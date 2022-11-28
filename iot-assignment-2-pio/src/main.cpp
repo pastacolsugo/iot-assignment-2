@@ -23,11 +23,9 @@ void setup() {
   lamp->init(LAMP_TASK_PERIOD);
   scheduler.addTask(lamp);
   
-  /*TODO
   Task* valve = new ValveTask(SERVO, POTENZIOMETER, status);
   valve->init(VALVE_TASK_PERIOD);
   scheduler.addTask(valve);
-  */
 
   Task* sonar = new SonarTask(SONAR_TRIG, SONAR_ECHO, status);
   sonar->init(SONAR_TASK_PERIOD_NORMAL);
@@ -51,5 +49,5 @@ void isPressed(){
     status->getValveControl() == Control::AUTO && status->getState() == State::ALARM ? 
       Control::MANUAL : Control::AUTO
   );
-  //status->setManualControlSource(ManualControlSource::POT_CONTROL);   //da modificare con aggiunta di seriale
+  status->setManualControlSource(ManualControlSource::POT_CONTROL);   //da modificare con aggiunta di seriale
 }
