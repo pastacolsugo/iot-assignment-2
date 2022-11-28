@@ -5,15 +5,16 @@
 #include <Status.h>
 #include <Task.h>
 #include <Valve.h>
+#include <Potenziometer.h>
+#include "Parameters.h"
 
 class ValveTask : public Task {
-  int valve_pin;
   Valve* valve;
+  Potenziometer* pot;
   Status* status;
 
  public:
-  ValveTask(int valvePin, Status* state);
-  void init(int period);
+  ValveTask(int valve_pin, int pot_pin, Status* state);
   void run();
 };
 

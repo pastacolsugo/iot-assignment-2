@@ -84,7 +84,7 @@
 
 			if (status == 'normal') {
 				normalIndicator.classList.add('active');
-			} else if (status == 'pre-alarm') {
+			} else if (status == 'prealarm') {
 				preAlarmIndicator.classList.add('active');
 			} else if (status == 'alarm') {				
 				alarmIndicator.classList.add('active');
@@ -153,7 +153,7 @@
 			}
 
 			let auto_manual_state = await res.text();
-			document.querySelector('#auto_manual_selector').checked = (auto_manual_state == 'True')
+			document.querySelector('#auto-manual-selector').checked = (auto_manual_state == 'True')
 		}
 
 		async function updateDashboard() {
@@ -173,7 +173,7 @@
 
 		function sendNewValue(){
 			let valve_position = document.querySelector('.manual-slider').value;
-			fetch(new Request('/set-valve', { method: 'POST', body: valve_position.toString()})
+			fetch(new Request('/set-valve', { method: 'POST', body: valve_position.toString()}));
 		}
 
 		slider.addEventListener('input', function(e) {

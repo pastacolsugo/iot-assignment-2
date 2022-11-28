@@ -1,21 +1,20 @@
 #ifndef __LAMPTASK__
 #define __LAMPTASK__
 
-#include <Arduino.h>
 #include <Led.h>
 #include <Photoresistor.h>
 #include <Pir.h>
 #include <Status.h>
 #include <Task.h>
+#include "Parameters.h"
 
 class LampTask : public Task {
  public:
   LampTask(int led, int pir, int photo, Status* state);
-  void init(int period);
   void run();
 
  private:
-  long long timeOfLastDetectedMovement;
+  unsigned long timeOfLastDetectedMovement = 0;
   Status* status;
   Led* led;
   Pir* pir;

@@ -1,6 +1,5 @@
-#include "Pir.h"
-
 #include <Arduino.h>
+#include "Pir.h"
 
 #define CALIBRATION_TIME_SEC 5
 

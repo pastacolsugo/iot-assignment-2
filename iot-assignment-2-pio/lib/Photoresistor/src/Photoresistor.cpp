@@ -1,6 +1,5 @@
-#include "Photoresistor.h"
-
 #include <Arduino.h>
+#include "Photoresistor.h"
 
 Photoresistor::Photoresistor(int pin) {
   this->pin = pin;

@@ -1,7 +1,7 @@
 #include <Task.h>
 #include <Status.h>
-#include <Parameters.h>
 #include <LiquidCrystal_I2C.h> 
+#include "Parameters.h"
 
 class LcdTask: public Task{
     private:
@@ -9,10 +9,10 @@ class LcdTask: public Task{
         LiquidCrystal_I2C* lcd;
         void printWater();
         void printValve();
+        void printControl();
 
     public:
         LcdTask(Status* st);
-        void init();
         void run();
 
 };

@@ -7,9 +7,15 @@ class Status {
  private:
   State state;
   Light lamp;
-  Control valve;
+  Control valveControl;
+  ManualControlSource manualControlSource;
+
   int waterLevel;
-  int valveDegree;
+  int valvePosition;
+  /*
+  int manualValvePosition;
+  int autoValvePosition;
+  */
 
  public:
   Status();
@@ -23,13 +29,21 @@ class Status {
   int getWater();
   void setWater(int lv);
 
-  Control getValve();
-  int getValveDegree();
+  Control getValveControl();
+  void setValveControl(const Control &c);
+  
+  ManualControlSource getManualControlSource();
+  void setManualControlSource(const ManualControlSource &s);
+  
+  int getValvePosition();
+  void setValvePosition(int pos);
 
-  bool matchStateStatus(State st);
-  bool matchLampStatus(Light lg);
-  bool matchValveStatus(Control vl);
+  int getAutoValvePosition();
+  void setAutoValvePosition(int pos);
 
+  int getManualValvePosition();
+  void setManualValvePosition(int pos);
+  
   // friend bool operator==(const Status &s, const Light &l) {
   //   return (s.lamp == l);
   // }
