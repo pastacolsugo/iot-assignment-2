@@ -5,7 +5,7 @@
 #include <Status.h>
 #include <Task.h>
 #include <Valve.h>
-#include <Potenziometer.h>
+#include <Potentiometer.h>
 #include "Parameters.h"
 
 class ValveTask : public Task {
