@@ -10,7 +10,7 @@ SonarTask::SonarTask(int trig_pin, int echo_pin, Status* state) {
 
 void SonarTask::run() {
   float sonarReading = sonar->getDistance();
-  int waterLevel = (WATER_LEVEL_MAX < sonarReading) ? WATER_LEVEL_MAX : WATER_LEVEL_MAX - sonarReading;   //cast implicito ad int
+  int waterLevel = (WATER_LEVEL_MAX < sonarReading) ? 0 : WATER_LEVEL_MAX - sonarReading;   //cast implicito ad int
   status->setWater(waterLevel);
 
   //Serial.print("sonarReading: " + String(sonarReading) + "\twaterLevel: " + waterLevel + "  ");
