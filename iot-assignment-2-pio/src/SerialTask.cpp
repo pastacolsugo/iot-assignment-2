@@ -71,6 +71,7 @@ void SerialTask::updateStatusFromMessage(char *mess) {
     }
     if (!strcmp(part[1], "manual")) {
       status->setManualControlSource(ManualControlSource::SERIAL_CONTROL);
+      status->setValveControl(Control::MANUAL);
       return;
     }
   }
