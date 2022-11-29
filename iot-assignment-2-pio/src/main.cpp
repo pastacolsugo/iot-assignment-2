@@ -7,6 +7,7 @@
 
 #include "LampTask.h"
 #include "ValveTask.h"
+#include "PotentiometerTask.h"
 #include "SonarTask.h"
 #include "StoplightTask.h"
 #include "LcdTask.h"
@@ -24,9 +25,13 @@ void setup() {
   lamp->init(LAMP_TASK_PERIOD);
   scheduler.addTask(lamp);
   
-  Task* valve = new ValveTask(SERVO, POTENZIOMETER, status);
+  Task* valve = new ValveTask(SERVO, status);
   valve->init(VALVE_TASK_PERIOD);
   scheduler.addTask(valve);
+
+  Task* pot = new PotentiometerTask(POTENZIOMETER, status);
+  pot->init(POTENTIOMETER_TASK_PERIOD);
+  scheduler.addTask(pot);
 
   Task* sonar = new SonarTask(SONAR_TRIG, SONAR_ECHO, status);
   sonar->init(SONAR_TASK_PERIOD_NORMAL);

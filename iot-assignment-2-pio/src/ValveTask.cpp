@@ -1,8 +1,7 @@
 #include "ValveTask.h"
 
-ValveTask::ValveTask(int valve_pin, int pot_pin, Status* state) {
+ValveTask::ValveTask(int valve_pin, Status* state) {
   this->valve = new Valve(valve_pin);
-  this->pot = new Potentiometer(pot_pin);
   this->status = state;
   this->valve->setPosition(0);
 }
@@ -10,15 +9,11 @@ ValveTask::ValveTask(int valve_pin, int pot_pin, Status* state) {
 void ValveTask::run() {
   if (status->getValveControl() == Control::MANUAL) {
     if (status->getManualControlSource() == ManualControlSource::POT_CONTROL) {
-      noInterrupts();
-      status->setValvePosition(pot->read());
-      interrupts();
-      //status->setValvePositionFromPotValvePosition();
+      status->setValvePositionFromPotValvePosition();
     }
     if (status->getManualControlSource() == ManualControlSource::SERIAL_CONTROL) {
       status->setValvePositionFromSerialValvePosition();
     }
-    valve->setPosition(status->getValvePosition());
 
   } else if (status->getState() == State::ALARM) {
     noInterrupts();
@@ -26,12 +21,11 @@ void ValveTask::run() {
         map(status->getWater(), WATER_LEVEL_2, WATER_LEVEL_MAX, 0, 180);
     status->setValvePosition(position);
     interrupts();
-    valve->setPosition(status->getValvePosition());
 
   } else {
     noInterrupts();
     status->setValvePosition(0);
     interrupts();
-    valve->setPosition(status->getValvePosition());
   }
+    valve->setPosition(status->getValvePosition());
 }
