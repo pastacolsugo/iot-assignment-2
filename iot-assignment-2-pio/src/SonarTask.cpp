@@ -1,34 +1,38 @@
 #include "SonarTask.h"
-//#include <Arduino.h>
+#include <Arduino.h>
 
 SonarTask::SonarTask(int trig_pin, int echo_pin, Status* state) {
   this->sonar = new Sonar(trig_pin, echo_pin);
   this->status = state;
 
-  //Serial.begin(9600);
+  // Serial.begin(9600);
 }
 
 void SonarTask::run() {
   float sonarReading = sonar->getDistance();
-  int waterLevel = (WATER_LEVEL_MAX < sonarReading) ? 0 : WATER_LEVEL_MAX - sonarReading;   //cast implicito ad int
-  status->setWater(waterLevel);
+  int wl = (WATER_LEVEL_MAX < sonarReading)
+               ? 0
+               : WATER_LEVEL_MAX - sonarReading;  // cast implicito ad int
 
-  //Serial.print("sonarReading: " + String(sonarReading) + "\twaterLevel: " + waterLevel + "  ");
+  status->setWater(wl);
 
-  if (waterLevel > WATER_LEVEL_2) {
+  // Serial.print("sonarReading: " + String(sonarReading) + "\twaterLevel: " +
+  // waterLevel + "  ");
+
+  if (wl > WATER_LEVEL_2) {
     status->setState(State::ALARM);
-    //Serial.println("alarm");
+    // Serial.println("alarm");
     setPeriod(SONAR_TASK_PERIOD_ALARM);
     return;
   }
 
-  if (waterLevel > WATER_LEVEL_1) {
+  if (wl > WATER_LEVEL_1) {
     status->setState(State::PREALARM);
-    //Serial.println("prealarm");
+    // Serial.println("prealarm");
     setPeriod(SONAR_TASK_PERIOD_PREALARM);
     return;
   }
   status->setState(State::NORMAL);
-  //Serial.println("normal");
+  // Serial.println("normal");
   setPeriod(SONAR_TASK_PERIOD_NORMAL);
 }

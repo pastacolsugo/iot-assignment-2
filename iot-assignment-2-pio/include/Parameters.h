@@ -23,9 +23,10 @@
 #define TOGGLE_PERIOD 2000
 
 // Used into ValveTask.cpp and SonarTask.cpp
-#define WATER_LEVEL_1 600
-#define WATER_LEVEL_2 750
-#define WATER_LEVEL_MAX 1000
+#define WATER_LEVEL_1 80
+#define WATER_LEVEL_2 130
+#define WATER_LEVEL_MAX 200
+#define WATER_LEVEL_OFFESET 30
 
 // Used into LcdTask.cpp
 /* I2C address of the LCD: 0x27 */

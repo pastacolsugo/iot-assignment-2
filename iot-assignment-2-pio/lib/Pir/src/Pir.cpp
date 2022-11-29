@@ -7,7 +7,7 @@ Pir::Pir(int pin) {
   this->pin = pin;
   pinMode(pin, INPUT);
 
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.print("Calibrating PIR sensor... ");
 
   for (int i = 0; i < CALIBRATION_TIME_SEC; i++) {

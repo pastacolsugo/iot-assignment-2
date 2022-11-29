@@ -32,7 +32,6 @@ void Status::setValvePositionFromPotValvePosition() {
   this->setValvePosition(this->PotValvePosition);
 }
 
-
 ManualControlSource Status::getManualControlSource() {
   return this->manualControlSource;
 }
