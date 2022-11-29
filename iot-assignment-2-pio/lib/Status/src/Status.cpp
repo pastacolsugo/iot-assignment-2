@@ -27,10 +27,6 @@ ManualControlSource Status::getManualControlSource() {
   return this->manualControlSource;
 }
 void Status::setManualControlSource(const ManualControlSource &s) {
-  if (s == ManualControlSource::SERIAL_CONTROL and
-      this->manualControlSource == ManualControlSource::POT_CONTROL) {
-    return;
-  }
   this->manualControlSource = s;
 }
 

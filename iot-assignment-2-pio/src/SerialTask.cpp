@@ -60,7 +60,8 @@ void SerialTask::updateStatusFromMessage(char *mess) {
   part[0] = strtok(mess, ":");
   part[1] = strtok(NULL, "\0");
 
-  if (!strcmp(part[0], "set_control")) {
+  if (!strcmp(part[0], "set_control") and
+      status->getManualControlSource() != ManualControlSource::POT_CONTROL) {
     if (!strcmp(part[1], "auto")) {
       // Se sono in manual da pot posso disabilitare e tornare in auto??
       // ATTENZIONE
