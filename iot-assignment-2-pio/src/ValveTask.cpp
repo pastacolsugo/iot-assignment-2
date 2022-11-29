@@ -16,16 +16,12 @@ void ValveTask::run() {
     }
 
   } else if (status->getState() == State::ALARM) {
-    noInterrupts();
     int position =
         map(status->getWater(), WATER_LEVEL_2, WATER_LEVEL_MAX, 0, 180);
     status->setValvePosition(position);
-    interrupts();
 
   } else {
-    noInterrupts();
     status->setValvePosition(0);
-    interrupts();
   }
     valve->setPosition(status->getValvePosition());
 }
