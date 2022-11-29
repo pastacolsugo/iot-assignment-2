@@ -10,6 +10,7 @@
 #include "SonarTask.h"
 #include "StoplightTask.h"
 #include "LcdTask.h"
+#include "SerialTask.h"
 
 
 Scheduler scheduler;
@@ -38,7 +39,11 @@ void setup() {
   Task* lcd = new LcdTask(status);
   lcd->init(LCD_TASK_PERIOD);
   scheduler.addTask(lcd);
-  
+
+  Task* serial = new SerialTask(status);
+  serial->init(SERIAL_TASK_PERIOD);
+  scheduler.addTask(serial);
+
   attachInterrupt(digitalPinToInterrupt(BUTTON), isPressed, RISING);
 }
 

@@ -46,6 +46,7 @@ void LcdTask::run(){
     default:
       lcd->print("NORMAL");
       lcd->setCursor(6, 0); printControl();
+      break;
   }
 
 
