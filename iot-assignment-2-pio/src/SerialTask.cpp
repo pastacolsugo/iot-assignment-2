@@ -88,8 +88,8 @@ void SerialTask::read() {
   while (Serial.available() > 0) {
     if (message_pos >= MAX_MESSAGE_LENGTH) {
       message_pos = 0;
-      while (Serial.available() > 0 and Serial.read() != '\0')
-        ;
+      while (Serial.available() > 0 and Serial.read() != '\0') {
+      };
     }
     // Read the next available byte in the serial receive buffer
     char inByte = Serial.read();
