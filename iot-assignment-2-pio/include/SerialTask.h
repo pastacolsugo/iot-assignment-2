@@ -1,5 +1,5 @@
-#ifndef __VALVETASK__
-#define __VALVETASK__
+#ifndef __SERIALTASK__
+#define __SERIALTASK__
 
 #include <Task.h>
 #include <Parameters.h>
