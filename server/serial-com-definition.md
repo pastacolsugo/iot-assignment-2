@@ -4,24 +4,40 @@ Baud 115200
 
 ## Messages from Arduino
 
+water lv    int 
+valve pos   int
+state       char* "normal/prealarm/alarm"
+control     char* "auto/manual"
+lamp        char* "off/on"
+
 ```
-lights:on
+control_source:none
+```
+```
+control_source:pot
+```
+```
+control_source:serial
 ```
 
 ```
-lights:off
+lamp:on
 ```
 
 ```
-status:normal
+lamp:off
 ```
 
 ```
-status:prealarm
+state:normal
 ```
 
 ```
-status:alarm
+state:prealarm
+```
+
+```
+state:alarm
 ```
 
 ```

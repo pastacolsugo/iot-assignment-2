@@ -30,4 +30,8 @@
 #define LCD_COLUMNS 20
 #define LCD_ROWS 4
 
+// Used into SerialTask.cpp
+#define SERIAL_BAUD 115200
+#define MAX_MESSAGE_LENGTH 16
+
 #endif

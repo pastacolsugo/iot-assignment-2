@@ -20,8 +20,19 @@ void Status::setWater(int w) { this->waterLevel = w; }
 Control Status::getValveControl() { return this->valveControl; }
 void Status::setValveControl(const Control &c) { this->valveControl = c; }
 
-ManualControlSource Status::getManualControlSource() { return this->manualControlSource; }
-void Status::setManualControlSource(const ManualControlSource &s) { this->manualControlSource = s; }
+int Status::getSerialValvePosition() { return this->SerialValvePosition; }
+void Status::setSerialValvePosition(int p) { this->SerialValvePosition = p; }
+
+ManualControlSource Status::getManualControlSource() {
+  return this->manualControlSource;
+}
+void Status::setManualControlSource(const ManualControlSource &s) {
+  if (s == ManualControlSource::SERIAL_CONTROL and
+      this->manualControlSource == ManualControlSource::POT_CONTROL) {
+    return;
+  }
+  this->manualControlSource = s;
+}
 
 int Status::getValvePosition() { return this->valvePosition; }
 void Status::setValvePosition(int pos) {
@@ -45,4 +56,3 @@ void Status::setManualValvePosition(int pos) {
   this->manualValvePosition = pos;
 }
 */
-

@@ -12,9 +12,10 @@ class Status {
 
   int waterLevel;
   int valvePosition;
+
+  int SerialValvePosition;
+  int PotValvePosition;
   /*
-  int manualValvePosition;
-  int autoValvePosition;
   */
 
  public:
@@ -41,8 +42,8 @@ class Status {
   int getAutoValvePosition();
   void setAutoValvePosition(int pos);
 
-  int getManualValvePosition();
-  void setManualValvePosition(int pos);
+  int getSerialValvePosition();
+  void setSerialValvePosition(int pos);
   
   // friend bool operator==(const Status &s, const Light &l) {
   //   return (s.lamp == l);

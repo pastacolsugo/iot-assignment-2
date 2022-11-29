@@ -2,6 +2,7 @@
 #define __VALVETASK__
 
 #include <Task.h>
+#include <Parameters.h>
 #include <Status.h>
 #include <Arduino.h>
 
@@ -9,16 +10,21 @@ class SerialTask: public Task{
     private:
         Status* status;
 
-        const char * generateStateMessage();
-        String generateConrolMessage();
-        String generateWaterMessage();
-        String generateValvePositionMessage();
+        void sendStateMessage();
+        void sendLampMessage();
+        void sendWaterMessage();
+        void sendControlMessage();
+        void sendValvePositionMessage();
+        void sendManualControlSourceMessage();
+        void sendTerminateMessage();
 
-        void toSerial();
-        void fromSerial();
+        void updateStatusFromMessage(char * mess);
+
+        void send();
+        void read();
 
     public:
-        SerialTask(Status st);
+        SerialTask(Status* st);
         void run();
 
 
