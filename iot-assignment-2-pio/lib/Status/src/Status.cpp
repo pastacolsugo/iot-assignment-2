@@ -22,6 +22,16 @@ void Status::setValveControl(const Control &c) { this->valveControl = c; }
 
 int Status::getSerialValvePosition() { return this->SerialValvePosition; }
 void Status::setSerialValvePosition(int p) { this->SerialValvePosition = p; }
+void Status::setValvePositionFromSerialValvePosition() {
+  this->setValvePosition(this->SerialValvePosition);
+}
+
+int Status::getPotValvePosition() { return this->PotValvePosition; }
+void Status::setPotValvePosition(int p) { this->PotValvePosition = p; }
+void Status::setValvePositionFromPotValvePosition() {
+  this->setValvePosition(this->PotValvePosition);
+}
+
 
 ManualControlSource Status::getManualControlSource() {
   return this->manualControlSource;

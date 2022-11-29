@@ -39,11 +39,18 @@ class Status {
   int getValvePosition();
   void setValvePosition(int pos);
 
+  /*
   int getAutoValvePosition();
   void setAutoValvePosition(int pos);
+  */
 
   int getSerialValvePosition();
   void setSerialValvePosition(int pos);
+  void setValvePositionFromSerialValvePosition();
+
+  int getPotValvePosition();
+  void setPotValvePosition(int pos);
+  void setValvePositionFromPotValvePosition();
   
   // friend bool operator==(const Status &s, const Light &l) {
   //   return (s.lamp == l);

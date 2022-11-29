@@ -39,7 +39,7 @@ void SerialTask::sendWaterMessage() {
 }
 
 void SerialTask::sendValvePositionMessage() {
-  Serial.print("valve_position:" + String(status->getValvePosition()));
+  Serial.println("valve_position:" + String(status->getValvePosition()));
 }
 
 void SerialTask::sendTerminateMessage() { Serial.println(); }
