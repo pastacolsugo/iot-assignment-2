@@ -15,6 +15,7 @@
 Scheduler scheduler;
 Status* status = new Status();
 void manualButtonPressed();
+unsigned long long lastButtonPress = 0;
 
 void setup() {
   scheduler.init(SCHDULER_PERIOD);
@@ -53,10 +54,22 @@ void setup() {
 void loop() { scheduler.schedule(); }
 
 /*
- * Serial and potentiometer have same importance. 
- * If serial is managing the valve, the button is disabled, and vice versa.
+ * Serial and potentiometer have the same importance.
+ * If serial is managing the valve, the physical button is disabled, and vice
+ * versa.
  */
 void manualButtonPressed() {
+  unsigned long long t = millis();
+  if (lastButtonPress == 0) {
+    lastButtonPress = t;
+  }
+
+  if (t - lastButtonPress <= 500) {
+    return;
+  }
+
+  lastButtonPress = t;
+
   if (status->getValveControl() == Control::MANUAL) {
     if (status->getManualControlSource() ==
         ManualControlSource::SERIAL_CONTROL) {
@@ -69,12 +82,12 @@ void manualButtonPressed() {
       return;
     }
   }
-  
-  //AUTO control
+
+  // AUTO control
   if (status->getState() != State::ALARM) {
-      return;
+    return;
   }
-  
+
   status->setValveControl(Control::MANUAL);
   status->setManualControlSource(ManualControlSource::POT_CONTROL);
   return;
