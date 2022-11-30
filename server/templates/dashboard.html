@@ -88,20 +88,10 @@
 				preAlarmIndicator.classList.add('active');
 			} else if (status == 'alarm') {				
 				alarmIndicator.classList.add('active');
-				playAlarm();
 			} else {
 				console.log("ERROR: setStatus() parameter not valid.\nParameter: " + status + "\nAllowed values are 'normal', 'pre-alarm' and 'alarm' as strings.");
 			}
 		}
-
-		function playAlarm() {
-            if (document.querySelector('div.alarm-status').classList.contains('active')) {
-	            var audio = new Audio('static/beep.mp3');
-	            audio.play();
-				setTimeout(checkAlarm, 2000);
-			}
-		}
-
 	</script>
 	<script type="text/javascript">
 		async function updateChart() {
@@ -153,7 +143,9 @@
 			}
 
 			let auto_manual_state = await res.text();
-			document.querySelector('#auto-manual-selector').checked = (auto_manual_state == 'True')
+			document.querySelector('#auto-manual-selector').checked = (auto_manual_state == 'manual');
+			document.querySelector('.manual-slider').disabled = (auto_manual_state == 'auto');
+			document.querySelector('.slider-label').disabled = (auto_manual_state == 'auto');
 		}
 
 		async function updateDashboard() {
@@ -222,6 +214,12 @@
 			type: 'line',
 			data: data,
 			options: {
+				scales: {
+					y : {
+						min: 0,
+						max: 200,
+					},
+				},
 				plugins: {
 					filler: {
 						propagate: false,
