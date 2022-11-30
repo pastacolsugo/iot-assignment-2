@@ -3,8 +3,8 @@ from datetime import datetime
 import random
 import serial
 import requests
+import datetime
 from queue import Queue
-from threading import Thread
 import platform
 
 app = Flask(__name__)
@@ -14,6 +14,7 @@ water_level_data = [('00:00', 100), ('00:01', 102), ('00:02', 108), ('00:03', 10
 manual_controls_enabled = False
 bridge_state = 'normal'
 lights_state = 'off'
+SERIAL_ENABLE = True
 
 if platform.system() == 'Darwin':
     arduino_serial_port = '/dev/cu.usbmodem14101'
@@ -21,7 +22,7 @@ elif platform.system() == 'Windows':
     arduino_serial_port = 'COM1' # ?
 baud_rate = 115200
 
-arduino_serial = serial.Serial(arduino_serial_port, 115200)
+arduino_serial = serial.Serial(arduino_serial_port, 115200) if SERIAL_ENABLE else 0
 serial_out_queue = Queue()
 serial_in_buffer = ""
 serial_lock = False
@@ -52,11 +53,13 @@ def parse_serial_message(msg):
         return
 
     if key == 'water_level':
+        t = str(datetime.datetime.now()).split(' ')[1].split('.')[0]
         wl = int(value)
-        water_level_data.append(wl)
-
+        water_level_data.append((t, wl))
 
 def serial_task():
+    if not SERIAL_ENABLE:
+        return
     global serial_lock
     if serial_lock:
         return
@@ -109,9 +112,9 @@ def dashboard():
 
 @app.route("/chart-data")
 def send_chart_data():
-    timestamp = f'00:{random.randint(0, 59)}'
-    water_level = random.randint(0, 300)
-    water_level_data.append((timestamp, water_level))
+    # timestamp = f'00:{random.randint(0, 59)}'
+    # water_level = random.randint(0, 300)
+    # water_level_data.append((timestamp, water_level))
     return water_level_data
 
 @app.route("/status")
