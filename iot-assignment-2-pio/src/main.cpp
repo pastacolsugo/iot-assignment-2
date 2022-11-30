@@ -60,6 +60,7 @@ void manualButtonPressed() {
   if (status->getValveControl() == Control::MANUAL) {
     if (status->getManualControlSource() ==
         ManualControlSource::SERIAL_CONTROL) {
+      status->setManualControlSource(ManualControlSource::POT_CONTROL);
       return;
     }
     if (status->getManualControlSource() == ManualControlSource::POT_CONTROL) {
@@ -68,14 +69,13 @@ void manualButtonPressed() {
       return;
     }
   }
-
-  if (status->getValveControl() == Control::AUTO) {
-    if (status->getState() == State::NORMAL or
-        status->getState() == State::PREALARM) {
+  
+  //AUTO control
+  if (status->getState() != State::ALARM) {
       return;
-    }
-    status->setValveControl(Control::MANUAL);
-    status->setManualControlSource(ManualControlSource::POT_CONTROL);
-    return;
   }
+  
+  status->setValveControl(Control::MANUAL);
+  status->setManualControlSource(ManualControlSource::POT_CONTROL);
+  return;
 }

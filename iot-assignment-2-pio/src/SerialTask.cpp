@@ -18,8 +18,8 @@ void SerialTask::sendStateMessage() {
 
 void SerialTask::sendLampMessage() {
   Serial.println((const char *[]){
-      "lamp:on",
       "lamp:off",
+      "lamp:on",
   }[status->getLamp()]);
 }
 
@@ -60,18 +60,18 @@ void SerialTask::updateStatusFromMessage(char *mess) {
   part[0] = strtok(mess, ":");
   part[1] = strtok(NULL, "\0");
 
-  if (!strcmp(part[0], "set_control") and
-      status->getManualControlSource() != ManualControlSource::POT_CONTROL) {
-    if (!strcmp(part[1], "auto")) {
-      // Se sono in manual da pot posso disabilitare e tornare in auto??
-      // ATTENZIONE
+  if (!strcmp(part[0], "set_control")) {
+    if (!strcmp(part[1], "auto") and status->getManualControlSource() == ManualControlSource::SERIAL_CONTROL) {
       status->setManualControlSource(ManualControlSource::DISABLED);
       status->setValveControl(Control::AUTO);
       return;
     }
-    if (!strcmp(part[1], "manual")) {
-      status->setManualControlSource(ManualControlSource::SERIAL_CONTROL);
+
+    if (!strcmp(part[1], "manual") and 
+        (status->getState() == State::ALARM or status->getManualControlSource() == ManualControlSource::POT_CONTROL)
+    ){
       status->setValveControl(Control::MANUAL);
+      status->setManualControlSource(ManualControlSource::SERIAL_CONTROL);
       return;
     }
   }
