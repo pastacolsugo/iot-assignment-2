@@ -9,9 +9,11 @@ import platform
 
 app = Flask(__name__)
 
-water_level_data = [('00:00', 100), ('00:01', 102), ('00:02', 108), ('00:03', 100)]
+water_level_data = []
 
-manual_controls_enabled = False
+control = 'auto'
+control_source = 'disabled'
+valve_position = 0
 bridge_state = 'normal'
 lights_state = 'off'
 SERIAL_ENABLE = True
@@ -30,9 +32,17 @@ serial_lock = False
 def parse_serial_message(msg):
     global bridge_state
     global lights_state
+    global water_level_data
+    global valve_position
+    global control
+    global control_source
+
+    if not ':' in msg:
+        return
+    print(msg)
     key, value = msg.split(':')
     value = value.strip()
-    if key == 'status':
+    if key == 'state':
         if value == 'normal':
             bridge_state = 'normal'
         elif value == 'prealarm':
@@ -43,7 +53,7 @@ def parse_serial_message(msg):
             print(f'SERIAL ERROR: Invalid status value {value}')
         return
 
-    if key == 'lights':
+    if key == 'lamp':
         if value == 'on':
             lights_state = 'on'
         elif value == 'off':
@@ -56,6 +66,15 @@ def parse_serial_message(msg):
         t = str(datetime.datetime.now()).split(' ')[1].split('.')[0]
         wl = int(value)
         water_level_data.append((t, wl))
+
+    if key == 'valve_position':
+        valve_position = int(value)
+
+    if key == 'control':
+        control = value
+
+    if key == 'control_source':
+        control_source = value
 
 def serial_task():
     if not SERIAL_ENABLE:
@@ -130,21 +149,24 @@ def lights():
 @app.route("/get-auto-manual")
 def get_auto_manual():
     serial_task()
-    return str(manual_controls_enabled)
+    return control
 
 @app.route("/set-auto-manual", methods=["POST"])
 def set_auto_manual():
     serial_task()
-    global manual_controls_enabled
+    global control
+    global control_source
     print(request.data.decode())
 
-    if (request.data.decode() == 'true'):
-        manual_controls_enabled = True
+    if (request.data.decode() == 'manual'):
+        control = 'manual'
+        control_source = 'serial'
         serial_set_control('manual')
         print('Manual control enabled')
 
-    elif (request.data.decode() == 'false'):
-        manual_controls_enabled = False
+    elif (request.data.decode() == 'auto'):
+        control = 'auto'
+        control_source = 'disabled'
         serial_set_control('auto')
         print('Manual control disabled')
 
@@ -154,8 +176,7 @@ def set_auto_manual():
 @app.route("/set-valve", methods=["POST"])
 def set_valve():
     serial_task()
-    print (manual_controls_enabled)
-    if (not manual_controls_enabled):
+    if (not control == 'manual'):
         return Response(status = 403)
 
     position = int(request.data.decode())
