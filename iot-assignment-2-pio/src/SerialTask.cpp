@@ -60,16 +60,20 @@ void SerialTask::updateStatusFromMessage(char *mess) {
   part[0] = strtok(mess, ":");
   part[1] = strtok(NULL, "\0");
 
+  // Serial.println(part[0]);
+  // Serial.println(part[1]);
+
   if (!strcmp(part[0], "set_control")) {
-    if (!strcmp(part[1], "auto") and status->getManualControlSource() == ManualControlSource::SERIAL_CONTROL) {
+    if (!strcmp(part[1], "auto") and status->getManualControlSource() ==
+                                         ManualControlSource::SERIAL_CONTROL) {
       status->setManualControlSource(ManualControlSource::DISABLED);
       status->setValveControl(Control::AUTO);
       return;
     }
 
-    if (!strcmp(part[1], "manual") and 
-        (status->getState() == State::ALARM or status->getManualControlSource() == ManualControlSource::POT_CONTROL)
-    ){
+    if (!strcmp(part[1], "manual") and (status->getState() == State::ALARM or
+                                        status->getManualControlSource() ==
+                                            ManualControlSource::POT_CONTROL)) {
       status->setValveControl(Control::MANUAL);
       status->setManualControlSource(ManualControlSource::SERIAL_CONTROL);
       return;
