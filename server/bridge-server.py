@@ -102,9 +102,9 @@ def serial_task():
 
 def serial_set_control(control):
     if control == 'auto':
-        serial_out_queue.put('set_control:auto')
+        serial_out_queue.put('set_control:auto\n')
     if control == 'manual':
-        serial_out_queue.put('set_control:manual')
+        serial_out_queue.put('set_control:manual\n')
     serial_task()
 
 def serial_set_valve(pos):
@@ -112,7 +112,7 @@ def serial_set_valve(pos):
         pos = 0
     if pos > 180:
         pos = 180
-    serial.serial_out_queue.put(f'set_valve:{str(pos)}')
+    serial_out_queue.put(f'set_valve:{str(pos)}\n')
     serial_task()
 
 # @app.route("/serial")
