@@ -30,7 +30,7 @@ void SerialTask::sendControlMessage() {
 
 void SerialTask::sendManualControlSourceMessage() {
   Serial.println((const char *[]){
-      "control_sorurce:none", "control_source:pot",
+      "control_source:disabled", "control_source:pot",
       "control_source:serial"}[status->getManualControlSource()]);
 }
 
