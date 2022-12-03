@@ -21,7 +21,7 @@ SERIAL_ENABLE = True
 if platform.system() == 'Darwin':
     arduino_serial_port = '/dev/cu.usbmodem14101'
 elif platform.system() == 'Windows':
-    arduino_serial_port = 'COM1' # ?
+    arduino_serial_port = 'COM3' # ?
 baud_rate = 115200
 
 arduino_serial = serial.Serial(arduino_serial_port, 115200) if SERIAL_ENABLE else 0
